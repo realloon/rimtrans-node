@@ -1,25 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Icon, IconLabel } from '@/components/common'
+import { IconLabel } from '@/components/common'
+import InputBox from '@/components/InputBox.vue'
 import EditList from '@/components/EditList.vue'
 import { useAboutStore } from '@/stores/about'
 
 const aboutStore = useAboutStore()
 const about = aboutStore.about
-
-const input = ref('')
-
-const addDependency = () => {
-  if (about.loadAfter.includes(input.value)) return alert('已有重复依赖')
-
-  about.loadAfter.push(input.value)
-  input.value = ''
-}
-const removeDependency = (item: string) => {
-  if (about.loadAfter.length <= 1) return alert('至少需一个依赖')
-
-  about.loadAfter = about.loadAfter.filter(value => value !== item)
-}
 </script>
 
 <template>
@@ -28,58 +14,55 @@ const removeDependency = (item: string) => {
 
     <form>
       <fieldset>
-        <legend hidden>Base</legend>
-        <icon-label icon="edit" text="基本信息" class="legend" />
+        <legend>
+          <icon-label icon="edit" text="基本信息" class="legend" />
+        </legend>
 
-        <label>
-          <input
+        <div class="wrapper">
+          <input-box
+            label="名称"
             v-model.trim="about.name"
-            name="name"
-            type="text"
-            autocomplete="false"
+            placeholder="输入项目名称"
           />
-          <span>名称</span>
-        </label>
 
-        <label>
-          <input v-model.trim="about.packageId" name="packageId" type="text" />
-          <span>包名</span>
-        </label>
+          <input-box
+            label="包名"
+            v-model.trim="about.packageId"
+            placeholder="输入项目包名"
+            style="font-family: var(--mono)"
+          />
 
-        <label>
-          <input
+          <input-box
+            label="作者"
             v-model.trim="about.author"
-            placeholder="Your name"
-            name="author"
-            type="text"
+            placeholder="输入你的名字"
           />
-          <span>作者</span>
-        </label>
 
-        <label>
-          <input
+          <input-box
+            label="描述"
             v-model.trim="about.description"
-            name="description"
-            type="text"
+            placeholder="输入该翻译模组的描述"
           />
-          <span>描述</span>
-        </label>
+        </div>
       </fieldset>
 
-      <fieldset class="version">
-        <legend hidden>supportedVersions</legend>
-        <icon-label icon="check" text="版本支持" class="legend" />
+      <fieldset>
+        <legend>
+          <icon-label icon="check" text="版本支持" class="legend" />
+        </legend>
 
-        <label v-for="version in about.supportedVersions">
-          <input
-            type="checkbox"
-            name="version"
-            :checked="Boolean(version)"
-            disabled
-            style="margin-right: 0.5em"
-          />
-          <span>{{ version }}</span>
-        </label>
+        <div class="wrapper">
+          <label v-for="version in about.supportedVersions">
+            <input
+              type="checkbox"
+              name="version"
+              :checked="Boolean(version)"
+              disabled
+              style="margin-right: 0.5em"
+            />
+            <span>{{ version }}</span>
+          </label>
+        </div>
       </fieldset>
 
       <edit-list
@@ -94,58 +77,37 @@ const removeDependency = (item: string) => {
 
 <style scoped>
 form {
-  margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 40px;
 }
 
-/* filed input */
-label {
-  display: flex;
-  margin-left: 1rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid hsl(0, 0%, 80%);
-  }
-
-  & input[type='text'],
-  & span {
-    font-size: 1rem;
-    line-height: 3rem;
-    height: 3rem;
-  }
-
-  & input[type='text'] {
-    flex-grow: 1;
-    border: none;
-    padding: 0;
-    background-color: transparent;
-    outline: none;
-  }
-
-  & span {
-    margin-right: 1rem;
-    color: gray;
-  }
-}
-
-/* fieldset {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  border: 1px solid #eef0f4;
+fieldset {
   padding: 0;
-  background-color: #f5f6f8;
-  border-radius: 8px;
-  position: relative;
+  border: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 
-  & > .legend {
-    font-weight: bold;
-    line-height: 1;
-    color: var(--theme);
-    position: absolute;
-    top: -1.5em;
+legend {
+  font-weight: bold;
+  color: var(--theme);
+}
+
+.wrapper {
+  background-color: #f5f6f8;
+  padding: 1rem;
+  border: 1px solid var(--light-gray);
+  margin-top: 0.5em;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+
+  label:not(:last-child) {
+    padding-bottom: 0.75em;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 0.75em;
   }
-} */
+}
 </style>
