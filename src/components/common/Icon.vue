@@ -22,6 +22,9 @@ const query: Record<string, string> = {
   out: 'icon-logout',
   download: 'icon-cloud-download',
   export: 'icon-export',
+  warn: 'icon-warning-circle',
+  error: 'icon-error',
+  experiment: 'icon-experiment',
 }
 </script>
 
