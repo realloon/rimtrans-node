@@ -35,12 +35,12 @@ const categoriesStore = useCategoriesStore()
     cursor: pointer;
 
     &:hover {
-      outline: 2px solid var(--light-gray);
+      outline: 2px solid var(--light-border);
       outline-offset: -1px;
     }
 
     &.active {
-      background-color: var(--light-gray);
+      background-color: var(--light-border);
     }
   }
 }

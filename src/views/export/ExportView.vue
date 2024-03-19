@@ -71,10 +71,10 @@ const exportProject = () => {
 <style scoped>
 section {
   margin-bottom: 32px;
-  border: 1px solid var(--light-gray);
+  border: 1px solid var(--light-border);
   padding: 16px 24px;
   border-radius: 8px;
-  background-color: #f5f6f8;
+  background-color:  var(--panel);
 
   h3 {
     font-size: 1rem;
@@ -98,14 +98,14 @@ button {
   font-weight: bold;
   line-height: 32px;
   padding: 0 0.5em;
-  border: 1px solid var(--light-gray);
+  border: 1px solid var(--light-border);
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--page);
   cursor: pointer;
   transition: 0.2s;
 
   &:hover {
-    color: white;
+    color: var(--page);
     background-color: var(--theme);
   }
 }

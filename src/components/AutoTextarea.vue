@@ -61,8 +61,8 @@ textarea {
   font-family: var(--mono);
   resize: none;
   overflow: hidden;
-  background-color: #f5f6f8;
-  border: 1px solid #eef0f4;
+  background-color: var(--panel);
+  border: 1px solid var(--light-border);
   border-radius: 8px;
 
   &:focus-within {

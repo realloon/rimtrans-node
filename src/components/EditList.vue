@@ -65,9 +65,9 @@ legend {
 ul,
 ol {
   font-family: var(--mono);
-  background-color: #f5f6f8;
+  background-color: var(--panel);
   padding: 1rem 1rem 1rem 3rem;
-  border: 1px solid #eef0f4;
+  border: 1px solid var(--light-border);
   margin: 0.5em 0;
   border-radius: 8px;
 }
@@ -100,11 +100,11 @@ li {
   button {
     width: 32px;
     height: 32px;
-    background-color: #f5f6f8;
+    background-color: var(--panel);
     border-radius: 50%;
     padding: 0;
     border: none;
-    outline-color: var(--light-gray);
+    outline-color: var(--light-border);
     cursor: pointer;
   }
 
@@ -113,10 +113,10 @@ li {
     font-size: 1rem;
     line-height: 2rem;
     font-family: var(--mono);
-    background-color: #f5f6f8;
+    background-color:  var(--panel);
     border: none;
     border-radius: 0.5rem;
-    outline-color: var(--light-gray);
+    outline-color: var(--light-border);
     /* transition */
     width: 0em;
     padding: 0;

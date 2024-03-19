@@ -27,7 +27,7 @@ const html = computed(() => {
 <style>
 .preview {
   padding: 1rem;
-  outline: 0.3em dashed #d3d3d3;
+  outline: 0.3em dashed var(--lighter);
   outline-offset: -0.3em;
   margin-bottom: 1rem;
 }

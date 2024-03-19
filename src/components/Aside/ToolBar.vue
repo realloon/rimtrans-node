@@ -15,7 +15,7 @@ import { Icon } from '../common'
 <style scoped>
 section {
   margin: -16px;
-  border-top: 1px solid #e7e9ec;
+  border-top: 1px solid var(--border);
   padding: 8px;
   display: flex;
   gap: 8px;
@@ -28,14 +28,16 @@ button {
   height: 24px;
   border-radius: 8px;
   cursor: pointer;
+  background-color: var(--page);
+  opacity: 0.5;
   transition: 0.2s;
-  background-color: white;
 
   & > span {
     font-size: 16px;
   }
 
   &:hover {
+    opacity: 1;
     outline: 2px solid #5c95ba;
   }
 }

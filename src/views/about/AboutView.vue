@@ -96,9 +96,9 @@ legend {
 }
 
 .wrapper {
-  background-color: #f5f6f8;
+  background-color:  var(--panel);
   padding: 1rem;
-  border: 1px solid var(--light-gray);
+  border: 1px solid var(--light-border);
   margin-top: 0.5em;
   border-radius: 8px;
   display: flex;
@@ -106,7 +106,7 @@ legend {
 
   label:not(:last-child) {
     padding-bottom: 0.75em;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--lighter);
     margin-bottom: 0.75em;
   }
 }

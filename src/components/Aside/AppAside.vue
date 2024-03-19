@@ -27,9 +27,9 @@ aside {
   top: 0;
   width: 100%;
   max-width: 240px;
-  background-color: #f5f6f8;
+  background-color:  var(--panel);
   padding: 16px 24px;
-  border-right: 1px solid var(--light-gray);
+  border-right: 1px solid var(--light-border);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

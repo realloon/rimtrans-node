@@ -40,11 +40,11 @@ a {
 
   &:hover,
   &.router-link-active {
-    outline: 1px solid var(--light-gray);
+    outline: 1px solid var(--light-border);
   }
 
   &.router-link-active {
-    background-color: white;
+    background-color: var(--page);
   }
 }
 

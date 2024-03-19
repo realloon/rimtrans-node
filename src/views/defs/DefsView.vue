@@ -23,7 +23,7 @@ const categoriesStore = useCategoriesStore()
           />
         </legend>
         <blockquote class="original">{{ def.content }}</blockquote>
-        <!-- <preview text="def.content" /> -->
+        <!-- <preview :text="def.content" /> -->
         <auto-textarea v-model="def.translated" :placeholder="def.content" />
       </fieldset>
     </form>
@@ -65,7 +65,7 @@ legend {
   font-size: 1rem;
   line-height: 1.3;
   margin: 16px 0;
-  border-left: 0.3em solid lightgray;
+  border-left: 0.3em solid var(--lighter);
   padding-left: 0.7em;
 }
 </style>

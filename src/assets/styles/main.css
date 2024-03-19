@@ -1,10 +1,31 @@
 @import './base.css';
 
 :root {
-  --theme: #5c95ba;
-
   /* color */
-  --light-gray: #eef0f4;
+  --theme: #5c95ba;
+  --black: #1e1e1e;
+
+  /* Color theme */
+  --font: var(--black);
+  --page: #ffffff;
+  --panel: #f5f6f8;
+  --border: #e6e8ec;
+  --light-border: #eef0f4;
+  --lighter: #b7b9be;
+
+  @media (prefers-color-scheme: dark) {
+    --font :#fffeff;
+    --page: #292c2e;
+    --panel: #202325;
+    --border: #1a1c1e;
+    --light-border: #1a1c1e;
+    --lighter: #949697;
+  }
+}
+
+body {
+  color: var(--font);
+  background-color: var(--page);
 }
 
 #app {

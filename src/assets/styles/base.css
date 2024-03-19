@@ -1,13 +1,12 @@
 :root {
-  --black: #1e1e1e;
-
   --sans: ui-sans-serif, sans-serif;
   --serif: ui-serif, serif;
   --mono: ui-monospace, monospace;
 }
 
 html {
-  color: var(--black);
+  color-scheme: light dark;
+
   font-family: var(--sans);
   line-height: 1.5;
 
