@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AutoTextarea from '@/components/AutoTextarea.vue'
+import Preview from './Preview.vue'
 import { useNodesStore } from '@/stores/nodes'
 import { useCategoriesStore } from '@/stores/categories'
 
@@ -22,6 +23,7 @@ const categoriesStore = useCategoriesStore()
           />
         </legend>
         <blockquote class="original">{{ def.content }}</blockquote>
+        <!-- <preview text="def.content" /> -->
         <auto-textarea v-model="def.translated" :placeholder="def.content" />
       </fieldset>
     </form>

@@ -41,6 +41,7 @@ watch(() => props.modelValue, autoResize)
 
 <template>
   <textarea
+    :spellcheck="false"
     name="textarea"
     ref="textareaRef"
     :value="modelValue"
