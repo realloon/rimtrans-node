@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import EditList from '@/components/EditList.vue'
 import { useSettingStore } from '@/stores/setting'
 const settingStore = useSettingStore()
 </script>
@@ -7,12 +8,8 @@ const settingStore = useSettingStore()
   <main>
     <h2>Setting (WIP)</h2>
     <form>
-      <fieldset>
-        <legend>提取字段</legend>
-        <ul>
-          <li v-for="field in settingStore.extractFields">{{ field }}</li>
-        </ul>
-      </fieldset>
+      
+      <edit-list :list="settingStore.extractFields" icon="search1" :header="'提取字段'" orderly/>
     </form>
   </main>
 </template>

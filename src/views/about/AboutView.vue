@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Icon, IconLabel } from '@/components/common'
+import EditList from '@/components/EditList.vue'
 import { useAboutStore } from '@/stores/about'
 
 const aboutStore = useAboutStore()
@@ -81,24 +82,12 @@ const removeDependency = (item: string) => {
         </label>
       </fieldset>
 
-      <fieldset class="dependency">
-        <legend hidden>loadAfter</legend>
-        <icon-label icon="unit" text="前置加载" class="legend" />
-
-        <ol>
-          <li v-for="item in about.loadAfter">
-            <div class="item">
-              <span>{{ item }}</span>
-              <icon @click="removeDependency(item)" type="close0" />
-            </div>
-          </li>
-        </ol>
-
-        <div class="add-wrapper">
-          <input v-model.trim="input" name="dependency" type="text" />
-          <button @click.prevent="addDependency"><icon type="plus" /></button>
-        </div>
-      </fieldset>
+      <edit-list
+        :list="about.loadAfter"
+        icon="unit"
+        header="前置依赖"
+        orderly
+      />
     </form>
   </main>
 </template>
@@ -141,7 +130,7 @@ label {
   }
 }
 
-fieldset {
+/* fieldset {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -151,7 +140,6 @@ fieldset {
   border-radius: 8px;
   position: relative;
 
-  /* show */
   & > .legend {
     font-weight: bold;
     line-height: 1;
@@ -159,75 +147,5 @@ fieldset {
     position: absolute;
     top: -1.5em;
   }
-}
-
-.dependency {
-  position: relative;
-
-  ol {
-    font-family: var(--mono);
-    margin: 0;
-    padding-left: 2em;
-    margin: 1rem;
-  }
-
-  .item {
-    display: flex;
-    align-items: baseline;
-
-    /* list item */
-    & > span:first-child {
-      flex-grow: 1;
-    }
-
-    & > span:last-child {
-      opacity: 0;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    &:hover > span:last-child {
-      opacity: 1;
-    }
-  }
-
-  .add-wrapper {
-    position: absolute;
-    bottom: -40px;
-    display: flex;
-
-    button {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      border: none;
-      padding: 0;
-      background-color: #f5f6f8;
-      outline-color: var(--light-gray);
-      cursor: pointer;
-    }
-
-    input {
-      font-family: var(--mono);
-      height: 2rem;
-      font-size: 1rem;
-      line-height: 2rem;
-      background-color: #f5f6f8;
-      border: none;
-      border-radius: 0.5rem;
-      transition: 0.5s;
-      outline-color: var(--light-gray);
-      /*  */
-      width: 0em;
-      padding: 0;
-      margin-right: 0rem;
-    }
-
-    &:hover input,
-    input:focus-within {
-      width: 12em;
-      padding: 0 1rem;
-      margin-right: 0.5rem;
-    }
-  }
-}
+} */
 </style>

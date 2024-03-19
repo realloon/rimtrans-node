@@ -25,6 +25,7 @@ const query: Record<string, string> = {
   warn: 'icon-warning-circle',
   error: 'icon-error',
   experiment: 'icon-experiment',
+  search1: 'icon-filesearch',
 }
 </script>
 
