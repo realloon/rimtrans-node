@@ -21,8 +21,13 @@ const router = createRouter({
     },
     {
       path: '/export',
-      name: 'aboexportut',
+      name: 'export',
       component: () => import('@/views/export/ExportView.vue'),
+    },
+    {
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/views/setting/SettingView.vue'),
     },
   ],
 })

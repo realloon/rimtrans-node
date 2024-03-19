@@ -21,9 +21,13 @@ main {
   max-height: 100vh;
   padding: 16px;
   margin: 0 auto;
-}
 
-main > h2 {
-  font-size: 2rem;
-  margin: 0 0 32px 0;
+  & > h2 {
+    font-size: 2rem;
+    margin: 0 0 32px 0;
+  }
+
+  form {
+    padding-bottom: 20vh;
+  }
 }

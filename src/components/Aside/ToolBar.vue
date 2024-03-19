@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import {Icon} from '../common'
+import { RouterLink } from 'vue-router'
+import { Icon } from '../common'
 </script>
 
 <template>
   <section>
-    <button><icon type="set" /></button>
+    <RouterLink to="/setting"
+      ><button><icon type="set" /></button
+    ></RouterLink>
     <button><icon type="search" /></button>
   </section>
 </template>
