@@ -10,7 +10,7 @@ const html = computed(() => {
   let convertedText: string = (props.text as string).replace(
     colorTagRegex,
     (_, colorCode, innerText) => {
-      return `<span style="color: #${colorCode}; font-weight: bold">${innerText}</span>`
+      return `<span style="color: #${colorCode};">${innerText}</span>`
     }
   )
 
@@ -27,8 +27,15 @@ const html = computed(() => {
 <style>
 .preview {
   padding: 1rem;
-  outline: 0.3em dashed var(--lighter);
   outline-offset: -0.3em;
   margin-bottom: 1rem;
+  /* preview */
+  color: white;
+  line-height: 1.3;
+  background-color: #15181d;
+
+  span {
+    font-weight: bold;
+  }
 }
 </style>

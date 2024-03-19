@@ -23,8 +23,9 @@ const categoriesStore = useCategoriesStore()
           />
         </legend>
         <blockquote class="original">{{ def.content }}</blockquote>
-        <!-- <preview :text="def.content" /> -->
+        <preview v-if="def.content?.includes('\\n')" :text="def.content" />
         <auto-textarea v-model="def.translated" :placeholder="def.content" />
+        <preview v-if="def.translated?.includes('\\n')" :text="def.translated" />
       </fieldset>
     </form>
   </main>
