@@ -1,0 +1,23 @@
+<ModMetaData>
+	<name>Astartes Vehicles_zh</name>
+	<author>璃玎珈琲姫</author>
+	<packageId>acchh.SMVehicleszh</packageId>
+
+	<supportedVersions>
+		<li>1.4</li>
+	</supportedVersions>
+
+	<modDependencies>
+		<li>
+			<packageId>NCFC.SMVehicles</packageId>
+			<displayName>Astartes Vehicles</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3171225119</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+
+	<loadAfter>
+		<li>NCFC.SMVehicles</li>
+	</loadAfter>
+
+	<description>阿斯塔特载具的汉化mod</description>
+</ModMetaData>

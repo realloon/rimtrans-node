@@ -1,0 +1,20 @@
+# TODO
+
+- [x] 上传 zip 并序列化；
+- [x] 提取 zip 目标文件；
+- [x] Defs Modle、About Modle；
+- [x] Defs Modle 绑定至 View；
+- [x] About 绑定至 View；
+- [x] 欢迎页设计；
+- [x] Defs 的分类和排序；
+- [x] 优化依赖管理；
+- [x] 调整依赖配置；
+- [x] 项目的缓存与导出；
+- [x] 重构文件导入功能；
+- [x] 输出 Mod 功能；
+- [ ] Preview 相关功能；
+- [ ] 提取 Patches；
+- [ ] Patches Modle；
+- [ ] Patches 绑定至 View；
+- [ ] 支持批量替换；
+- [ ] 支持多项目管理；

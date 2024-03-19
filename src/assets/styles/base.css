@@ -1,0 +1,27 @@
+:root {
+  --black: #1e1e1e;
+
+  --sans: ui-sans-serif, sans-serif;
+  --serif: ui-serif, serif;
+  --mono: ui-monospace, monospace;
+}
+
+html {
+  color: var(--black);
+  font-family: var(--sans);
+  line-height: 1.5;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+}

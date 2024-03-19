@@ -1,0 +1,29 @@
+@import './base.css';
+
+:root {
+  --theme: #5c95ba;
+
+  /* color */
+  --light-gray: #eef0f4;
+}
+
+#app {
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  overflow: auto;
+}
+
+main {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 640px;
+  max-height: 100vh;
+  padding: 16px;
+  margin: 0 auto;
+}
+
+main > h2 {
+  font-size: 2rem;
+  margin: 0 0 32px 0;
+}
