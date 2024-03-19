@@ -14,7 +14,7 @@ const emit = defineEmits(['update:modelValue'])
 function updateValue(event: Event) {
   const inputElement = event.target as HTMLInputElement
   if (inputElement) {
-    emit('update:modelValue', inputElement.value)
+    emit('update:modelValue', inputElement.value.trim())
   }
 }
 </script>

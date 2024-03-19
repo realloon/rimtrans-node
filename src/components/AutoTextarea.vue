@@ -31,7 +31,7 @@ const autoResize = () => {
 const handle = (event: Event) => {
   const target = event.target as HTMLTextAreaElement
   autoResize() // updata
-  emit('update:modelValue', target.value) // TODO: trim space
+  emit('update:modelValue', target.value.trim())
 }
 
 onMounted(autoResize) // init
