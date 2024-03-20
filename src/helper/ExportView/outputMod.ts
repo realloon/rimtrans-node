@@ -18,7 +18,7 @@ export default async function outputMod(language: string) {
   const defs = nodesStores.defs
   // categories
   const categoriesStore = useCategoriesStore()
-  categoriesStore.categories.forEach(category => {
+  categoriesStore.categories.forEach((category) => {
     const path = `/Language/${language}/DefInjected/${category}/${category}.xml`
     const content = defsXml(defs.filter(def => def.folder === category))
 
