@@ -5,15 +5,26 @@ const readFile = (file: File) =>
     reader.onload = readEvent => {
       const content = readEvent.target?.result
 
-      content && resolve(content)
+      content
+        ? resolve(content)
+        : reject(new Error('Content is null or undefined.'))
     }
 
-    if (file.type === 'application/zip') {
+    reader.onerror = errorEvent =>
+      reject(
+        errorEvent.target?.error ||
+          new Error('Error occurred while reading the file.')
+      )
+
+    if (
+      file.type === 'application/zip' ||
+      file.type === 'application/x-zip-compressed'
+    ) {
       reader.readAsArrayBuffer(file)
     } else if (file.name.endsWith('.rnp')) {
       reader.readAsText(file)
     } else {
-      reject('Illegal file type')
+      reject(new Error('Illegal file type'))
       return
     }
   })
