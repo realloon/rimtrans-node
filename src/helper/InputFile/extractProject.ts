@@ -1,4 +1,5 @@
 import type { Def, Project } from '@/types'
+import { nanoid } from 'nanoid'
 import extractXmlsFromZip from './extractXmlsFromZip'
 import extractNodesFromXmls from './extractNodesFromXmls'
 import xmlToAbout from './xmlToAbout'
@@ -17,6 +18,7 @@ function extractProject(source: string | ArrayBuffer): Promise<Project> {
       const nodes = await extractNodesFromXmls(defXmls)
 
       const defs: Def[] = nodes.map(node => ({
+        id: nanoid(),
         folder: extractFolder(node) as string,
         tagName: extractTagName(node) as string,
         content: extractContent(node),

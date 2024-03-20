@@ -1,54 +1,60 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, defineProps, defineEmits } from 'vue'
+import { ref, watch, onMounted, type Ref } from 'vue'
 
 interface Props {
   modelValue: string
-  placeholder: string
 }
 
-const props = defineProps<Props>()
-const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
+// 定义属性和事件
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+})
 
-const textareaRef = ref<HTMLTextAreaElement | null>(null)
-const minHeight = 23 // init height
-const height = ref<number>(minHeight) // reactive-height
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void
+}>()
 
-const resetHeight = () => {
-  if (!textareaRef.value) return
+// 创建 textarea 引用
+const textareaRef: Ref<HTMLTextAreaElement | null> = ref(null)
 
-  textareaRef.value.style.height = 'inherit'
-}
-
-const autoResize = () => {
-  resetHeight()
-
-  if (!textareaRef.value) return
-
-  const newHeight = Math.max(textareaRef.value.scrollHeight, minHeight) // 计算新高度
-  height.value = newHeight // updat reactive-height
-}
-
-const handle = (event: Event) => {
+// 更新 modelValue 和调整高度
+const updateModelValue = (event: Event) => {
   const target = event.target as HTMLTextAreaElement
-  autoResize() // updata
-  emit('update:modelValue', target.value.trim())
+  const value = target.value
+  // 发送 update:modelValue 事件，允许 v-model 双向绑定
+  emit('update:modelValue', value)
+  adjustHeight(target)
 }
 
-onMounted(autoResize) // init
+// 调整 textarea 高度的方法
+const adjustHeight = (element: HTMLTextAreaElement) => {
+  element.style.height = 'auto'
+  element.style.height = `${element.scrollHeight}px`
+}
 
-watch(() => props.modelValue, autoResize)
+// 监听 modelValue 的变化
+watch(
+  () => props.modelValue,
+  newValue => {
+    const textarea = textareaRef.value
+    if (textarea) {
+      textarea.value = newValue
+      adjustHeight(textarea)
+    }
+  }
+)
+
+// 初始加载时调整 textarea 高度
+onMounted(() => {
+  const textarea = textareaRef.value
+  if (textarea) {
+    adjustHeight(textarea)
+  }
+})
 </script>
 
 <template>
-  <textarea
-    :spellcheck="false"
-    name="textarea"
-    ref="textareaRef"
-    :value="modelValue"
-    @input="handle"
-    :style="{ minHeight: minHeight + 'px', height: height + 'px' }"
-    :placeholder="placeholder"
-  ></textarea>
+  <textarea ref="textareaRef" :value="modelValue" @input="updateModelValue" />
 </template>
 
 <style scoped>
@@ -64,9 +70,11 @@ textarea {
   background-color: var(--panel);
   border: 1px solid var(--light-border);
   border-radius: 8px;
+  outline-color: var(--theme);
+  outline: none;
+}
 
-  &:focus-within {
-    outline-color: var(--theme);
-  }
+textarea:focus {
+  border-color: var(--theme);
 }
 </style>

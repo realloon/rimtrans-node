@@ -13,7 +13,7 @@ const categoriesStore = useCategoriesStore()
   <main>
     <h2>{{ categoriesStore.currentCategory || 'All Defs' }}</h2>
     <form>
-      <fieldset v-for="def in nodesStore.groupedDefs" :key="nanoid()">
+      <fieldset v-for="def in nodesStore.groupedDefs" :key="def.id">
         <legend>
           {{ def.tagName }}
           <input

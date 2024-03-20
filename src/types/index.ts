@@ -1,4 +1,5 @@
 export type Def = {
+  id: string
   folder: string
   tagName: string
   content: string
