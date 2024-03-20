@@ -3,8 +3,8 @@ import JSZip from 'jszip'
 const unzip = new JSZip()
 
 const regexs = {
-  defs: /^\d+\/1.\d\/Defs\/.+.xml/,
-  about: /^\d+\/About\/About.xml/,
+  defs: /\d.\d\/Defs\/.+.xml$/,
+  about: /About\/About.xml$/,
 }
 
 type Xmls = {
@@ -34,7 +34,7 @@ const extractXmlsFromZip = async (zip: ArrayBuffer): Promise<Xmls> =>
       const aboutXml = await (targrt.file(aboutPath) as ZipObj).async('string')
 
       resolve({
-        defXmls: defXmls,
+        defXmls,
         aboutXml,
       })
     })
