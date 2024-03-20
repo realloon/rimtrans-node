@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { nanoid } from 'nanoid';
 import { useCategoriesStore } from '@/stores/categories'
 const categoriesStore = useCategoriesStore()
 </script>
@@ -9,7 +10,7 @@ const categoriesStore = useCategoriesStore()
       v-for="item in categoriesStore.categories"
       @click="categoriesStore.currentCategory = item"
       :class="categoriesStore.currentCategory === item && 'active'"
-      :key="item"
+      :key="nanoid()"
     >
       {{ item }}
     </li>

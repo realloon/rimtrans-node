@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { nanoid } from 'nanoid';
 import { Icon, IconLabel } from './common'
 import { ref } from 'vue'
 const props = defineProps<{
@@ -31,7 +32,7 @@ const remove = (source: string) => {
     <legend><icon-label :icon="props.icon" :text="props.header" /></legend>
 
     <component :is="orderly ? 'ol' : 'ul'">
-      <li v-for="item in props.list" :key="item">
+      <li v-for="item in props.list" :key="nanoid()">
         <span>{{ item }}</span>
         <icon v-if="remove" @click="remove(item)" type="close0" />
       </li>

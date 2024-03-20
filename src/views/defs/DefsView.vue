@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { nanoid } from 'nanoid'
 import AutoTextarea from '@/components/AutoTextarea.vue'
 import Preview from './Preview.vue'
 import { useNodesStore } from '@/stores/nodes'
@@ -12,7 +13,7 @@ const categoriesStore = useCategoriesStore()
   <main>
     <h2>{{ categoriesStore.currentCategory || 'All Defs' }}</h2>
     <form>
-      <fieldset v-for="def in nodesStore.groupedDefs" :key="def.tagName">
+      <fieldset v-for="def in nodesStore.groupedDefs" :key="nanoid()">
         <legend>
           {{ def.tagName }}
           <input
@@ -25,7 +26,10 @@ const categoriesStore = useCategoriesStore()
         <blockquote class="original">{{ def.content }}</blockquote>
         <preview v-if="def.content?.includes('\\n')" :text="def.content" />
         <auto-textarea v-model="def.translated" :placeholder="def.content" />
-        <preview v-if="def.translated?.includes('\\n')" :text="def.translated" />
+        <preview
+          v-if="def.translated?.includes('\\n')"
+          :text="def.translated"
+        />
       </fieldset>
     </form>
   </main>
