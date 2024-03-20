@@ -20,7 +20,7 @@ const version = '0.4.0'
         <icon type="zip" /> .zip 文件或 <icon type="project" /> .rnp 项目文件。
       </p>
       <p class="warn">
-        Rimtrans Node 正处于早期开发阶段，为避免意外情况，请勿
+        Rimtrans Node 正处于早期开发阶段，<br />为避免意外情况，请勿
         <icon type="error" /> 用于正式翻译项目。
       </p>
       <div class="chat">
