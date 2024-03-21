@@ -4,7 +4,7 @@ export default function extractTagName(
 ): string {
   // tagName +> []
   if (element && element.tagName) {
-    let tag = element.tagName.toLowerCase()
+    let tag = element.tagName
 
     // Handling of <li>
     if (tag === 'li' && element.parentElement) {
@@ -15,11 +15,11 @@ export default function extractTagName(
     prevTags.unshift(tag)
   }
 
-  const defNameElement = element?.parentElement?.querySelector('defName')
+  const defNameElement =
+    element?.parentElement?.getElementsByTagName('defName')[0]
 
   if (defNameElement) {
-    const value: string =
-      defNameElement.textContent?.trim().replace(' ', '') ?? ''
+    const value: string = defNameElement.textContent?.trim() ?? ''
     const tagsPrefix: string = prevTags.join('.')
     return tagsPrefix ? `${value}.${tagsPrefix}` : value
   }
