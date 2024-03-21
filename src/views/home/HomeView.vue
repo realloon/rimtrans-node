@@ -2,7 +2,7 @@
 import logo from '@/assets/images/logo.png'
 import chat from '@/assets/images/chat.png'
 import { Icon } from '@/components/common'
-const version = '0.4.2'
+const version = '0.4.3'
 </script>
 
 <template>
