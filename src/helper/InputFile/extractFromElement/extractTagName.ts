@@ -1,33 +1,27 @@
+const resovedTag = (element: Element) =>
+  element.tagName === 'li'
+    ? Array.from((element.parentElement as Element).children)
+        .indexOf(element)
+        .toString()
+    : element.tagName
+
+const owndChildren = (element: Element, tagName: string) =>
+  Array.from(element.children).find(children => children.tagName === tagName)
+
+// TODO: Cannot handle cases of abstract inheritance, yet.
 export default function extractTagName(
   element: Element | null,
   prevTags: string[] = []
 ): string {
-  // tagName +> []
-  if (element && element.tagName) {
-    let tag = element.tagName
+  if (!element || !element.parentElement) return ''
 
-    // Handling of <li>
-    if (tag === 'li' && element.parentElement) {
-      const index = Array.from(element.parentElement.children).indexOf(element)
-      tag = index.toString() // li => index
-    }
+  prevTags.unshift(resovedTag(element))
 
-    prevTags.unshift(tag)
-  }
+  const defNameElement = owndChildren(element?.parentElement, 'defName')
 
-  const defNameElement =
-    element?.parentElement?.getElementsByTagName('defName')[0]
+  if (!defNameElement) return extractTagName(element.parentElement, prevTags)
 
-  if (defNameElement) {
-    const value: string = defNameElement.textContent?.trim() ?? ''
-    const tagsPrefix: string = prevTags.join('.')
-    return tagsPrefix ? `${value}.${tagsPrefix}` : value
-  }
-
-  // has parent
-  if (element && element.parentElement) {
-    return extractTagName(element.parentElement, prevTags)
-  }
-
-  return '' // dom root
+  const value: string = defNameElement.textContent?.trim() ?? ''
+  const tagsPrefix: string = prevTags.join('.')
+  return tagsPrefix ? `${value}.${tagsPrefix}` : value
 }
