@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import logo from '@/assets/images/logo.png'
 import chat from '@/assets/images/chat.png'
 import { Icon } from '@/components/common'
-const version = '0.4.4'
+
+const version = ref('0.0.0')
+
+onMounted(() => {
+  const url =
+    'https://raw.githubusercontent.com/realloon/rimtrans-node/main/package.json'
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => (version.value = data.version))
+})
 </script>
 
 <template>
