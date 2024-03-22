@@ -40,15 +40,11 @@ main {
   width: 100%;
   max-width: 640px;
   max-height: 100vh;
-  padding: 16px;
+  padding: 16px 16px;
   margin: 0 auto;
 
   & > h2 {
     font-size: 2rem;
     margin: 0 0 32px 0;
-  }
-
-  form {
-    padding-bottom: 10vh;
   }
 }

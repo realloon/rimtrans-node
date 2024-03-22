@@ -1,25 +1,36 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import AutoTextarea from '@/components/AutoTextarea.vue'
 import Preview from './Preview.vue'
+import Pagination from './Pagination.vue'
 import { useNodesStore } from '@/stores/nodes'
 
 const nodesStore = useNodesStore()
 const route = useRoute()
 
-const defs = computed(() =>
-  route.params.category !== ''
-    ? nodesStore.defs.filter(def => def.folder === route.params.category)
-    : nodesStore.defs
+const defs = computed(
+  () =>
+    (route.params.category !== ''
+      ? nodesStore.defs.filter(def => def.folder === route.params.category)
+      : nodesStore.defs
+    ).filter(def => def.tagName !== '') // Unresolved abstract inheritance fields.
 )
+
+const limit = 10
+const totalPage = computed(() => Math.ceil(defs.value.length / limit))
+const currentPage = ref(1)
+const pagedDefs = computed(() => {
+  const index = (currentPage.value - 1) * limit
+  return defs.value.slice(index, index + limit)
+})
 </script>
 
 <template>
   <main>
     <h2>{{ route.params.category || 'All Defs' }}</h2>
     <form>
-      <fieldset v-for="def in defs" :key="def.id">
+      <fieldset v-for="def in pagedDefs" :key="def.id">
         <legend>
           {{ def.tagName }}
           <input
@@ -42,6 +53,14 @@ const defs = computed(() =>
         />
       </fieldset>
     </form>
+
+    <Pagination
+      :currentPage="currentPage"
+      :totalPage="totalPage"
+      @update:currentPage="value => (currentPage = value)"
+    />
+
+    <div class="spacer"></div>
   </main>
 </template>
 
@@ -82,5 +101,9 @@ legend {
   margin: 16px 0;
   border-left: 0.3em solid var(--lighter);
   padding-left: 0.7em;
+}
+
+.spacer {
+  height: 10vh;
 }
 </style>
