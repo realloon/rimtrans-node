@@ -8,11 +8,11 @@ import { useNodesStore } from '@/stores/nodes'
 const nodesStore = useNodesStore()
 const route = useRoute()
 
-const defs = computed(() => {
-  return route.params.category !== ''
+const defs = computed(() =>
+  route.params.category !== ''
     ? nodesStore.defs.filter(def => def.folder === route.params.category)
     : nodesStore.defs
-})
+)
 </script>
 
 <template>

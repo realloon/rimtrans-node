@@ -1,5 +1,5 @@
 import type { Def } from '@/types'
-import { reactive, computed, watch } from 'vue'
+import { reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { debounce } from '@/utils'
 
