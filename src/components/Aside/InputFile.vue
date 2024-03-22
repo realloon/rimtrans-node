@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 import { Icon } from '@/components/common'
 import { useAboutStore } from '@/stores/about'
-
 import { loadFile } from '@/helper/InputFile'
 
 const aboutStore = useAboutStore()
 const projectName = computed(() => aboutStore.about.name)
+
+const router = useRouter()
+function handle(event: Event) {
+  loadFile(event)
+  router.replace('/defs')
+}
 </script>
 
 <template>
@@ -16,7 +22,7 @@ const projectName = computed(() => aboutStore.about.name)
       <span class="project-name">{{ projectName || '点击上传文件' }}</span>
     </div>
 
-    <input @change="loadFile" type="file" accept=".zip, .rnp" />
+    <input @change="handle" type="file" accept=".zip, .rnp" />
   </section>
 </template>
 

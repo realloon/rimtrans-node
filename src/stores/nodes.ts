@@ -1,30 +1,27 @@
 import type { Def } from '@/types'
 import { reactive, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { useCategoriesStore } from './categories'
 import { debounce } from '@/utils'
 
 export const useNodesStore = defineStore('nodes', () => {
   const local = JSON.parse(localStorage.getItem('rn-workspace-defs') as string)
-  const defs: Array<Def> = reactive(local || [])
 
-  // Output by category.
-  const categoriesStore = useCategoriesStore()
-  const groupedDefs = computed(() =>
-    categoriesStore.currentCategory
-      ? defs.filter(def => def.folder === categoriesStore.currentCategory)
-      : defs
-  )
+  const defs: Array<Def> = reactive(local || [])
+  const categories: Set<string> = reactive(new Set(defs.map(def => def.folder)))
 
   const $reset = () => {
     defs.length = 0
+    categories.clear()
   }
 
   const replace = (source: Array<Def>) => {
     $reset()
+
     source.forEach(def => {
       defs.push(def)
+      categories.add(def.folder)
     })
+    
     defs.sort((a, b) => a.tagName.localeCompare(b.tagName))
   }
 
@@ -36,5 +33,5 @@ export const useNodesStore = defineStore('nodes', () => {
     debounceSave()
   })
 
-  return { defs, groupedDefs, $reset, replace }
+  return { defs, categories, $reset, replace }
 })

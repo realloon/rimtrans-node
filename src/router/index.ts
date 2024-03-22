@@ -11,7 +11,7 @@ const router = createRouter({
       component: homeView,
     },
     {
-      path: '/defs',
+      path: '/defs/:category?',
       name: 'defs',
       component: DefsView,
     },

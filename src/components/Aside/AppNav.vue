@@ -1,59 +1,53 @@
 <script setup lang="ts">
-import SubMenu from './SubMenu.vue'
+import SubNav from './SubNav.vue'
 import { IconLabel } from '../common'
-import { useCategoriesStore } from '@/stores/categories'
-const categoriesStore = useCategoriesStore()
+import { useNodesStore } from '@/stores/nodes'
+const { categories } = useNodesStore()
 </script>
 
 <template>
-  <nav v-show="categoriesStore.categories.size > 0">
-    <RouterLink to="/defs" class="defs">
-      <icon-label
-        @click="categoriesStore.currentCategory = null"
-        icon="read"
-        text="Defs"
-      />
-      <sub-menu />
-    </RouterLink>
+  <nav class="menu" v-show="categories.size > 0">
+    <section>
+      <RouterLink to="/defs" class="defs">
+        <icon-label icon="read" text="Defs" />
+      </RouterLink>
+      <sub-nav />
+    </section>
 
-    <RouterLink to="/about"><icon-label icon="info" text="About" /></RouterLink>
+    <section>
+      <RouterLink to="/about">
+        <icon-label icon="info" text="About" />
+      </RouterLink>
+    </section>
 
-    <RouterLink to="/export"
-      ><icon-label icon="export" text="Export"
-    /></RouterLink>
+    <section>
+      <RouterLink to="/export">
+        <icon-label icon="export" text="Export" />
+      </RouterLink>
+    </section>
   </nav>
 </template>
 
 <style scoped>
 nav {
-  margin: 0 -8px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-a {
-  font-weight: bold;
-  padding: 0.5rem;
+section {
+  margin: 0 -8px;
   border-radius: 6px;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s;
 
-  &:hover,
-  &.router-link-active {
+  &:has(.router-link-active) {
+    background-color: var(--page);
     outline: 1px solid var(--light-border);
   }
 
-  &.router-link-active {
-    background-color: var(--page);
-  }
-}
-
-.defs {
-  cursor: unset;
-
-  div {
-    width: 100%;
-    cursor: pointer;
+  a {
+    font-weight: bold;
+    display: block;
+    padding: 8px;
   }
 }
 </style>

@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { nanoid } from 'nanoid'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import AutoTextarea from '@/components/AutoTextarea.vue'
 import Preview from './Preview.vue'
 import { useNodesStore } from '@/stores/nodes'
-import { useCategoriesStore } from '@/stores/categories'
 
 const nodesStore = useNodesStore()
-const categoriesStore = useCategoriesStore()
+const route = useRoute()
+
+const defs = computed(() => {
+  return route.params.category !== ''
+    ? nodesStore.defs.filter(def => def.folder === route.params.category)
+    : nodesStore.defs
+})
 </script>
 
 <template>
   <main>
-    <h2>{{ categoriesStore.currentCategory || 'All Defs' }}</h2>
+    <h2>{{ route.params.category || 'All Defs' }}</h2>
     <form>
-      <fieldset v-for="def in nodesStore.groupedDefs" :key="def.id">
+      <fieldset v-for="def in defs" :key="def.id">
         <legend>
           {{ def.tagName }}
           <input
@@ -25,7 +31,11 @@ const categoriesStore = useCategoriesStore()
         </legend>
         <blockquote class="original">{{ def.content }}</blockquote>
         <preview v-if="def.content?.includes('\\n')" :text="def.content" />
-        <auto-textarea v-model="def.translated" :placeholder="def.content" />
+        <auto-textarea
+          v-model="def.translated"
+          :placeholder="def.content"
+          name="filed"
+        />
         <preview
           v-if="def.translated?.includes('\\n')"
           :text="def.translated"
