@@ -17,7 +17,7 @@ export default async function outputMod(language: string) {
   const defs = nodesStores.defs
   // categories
   nodesStores.categories.forEach(category => {
-    const path = `/Language/${language}/DefInjected/${category}/${category}.xml`
+    const path = `/Languages/${language}/DefInjected/${category}/${category}.xml`
     const content = defsXml(defs.filter(def => def.folder === category))
 
     zip.file(path, content)
