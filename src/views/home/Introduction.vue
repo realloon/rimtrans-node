@@ -23,11 +23,11 @@ onMounted(() => {
     <h2 class="title">Rimtrans Node</h2>
     <p class="version">Version {{ version }} <icon type="experiment" /></p>
     <h2>次时代的 Rimworld Mod 翻译工具</h2>
+    <input-file />
     <p>
       上传由 Mod 打包的 <icon type="zip" /> .zip 文件或
       <icon type="project" /> .rnp 项目文件。
     </p>
-    <input-file />
     <p class="warn">
       <icon type="error" /> Rimtrans Node 正处于早期开发阶段，<br />为避免意外情况，请勿用于正式翻译项目。
     </p>
