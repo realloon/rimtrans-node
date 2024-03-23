@@ -14,7 +14,7 @@
   --lighter: #b7b9be;
 
   @media (prefers-color-scheme: dark) {
-    --font :#fffeff;
+    --font: #fffeff;
     --page: #292c2e;
     --panel: #202325;
     --border: #1a1c1e;
@@ -46,5 +46,21 @@ main {
   & > h2 {
     font-size: 2rem;
     margin: 0 0 32px 0;
+  }
+}
+
+section.card {
+  border: 1px solid var(--light-border);
+  padding: 16px 24px;
+  border-radius: 8px;
+  background-color: var(--panel);
+
+  h3 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  p {
+    margin: 0.5em 0;
   }
 }

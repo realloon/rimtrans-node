@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { IconLabel } from '@/components/common'
 import { useNodesStore } from '@/stores/nodes'
 import { useAboutStore } from '@/stores/about'
+import Progression from '@/components/Progression.vue'
 import saveFile from '@/utils/saveFile'
 import { outputMod } from '@/helper/ExportView'
 
@@ -11,11 +12,6 @@ const aboutStore = useAboutStore()
 
 const language = ref('ChineseSimplified')
 const languages = { ChineseSimplified: '简体中文' }
-
-const total = computed(() => nodesStores.defs.length)
-const completed = computed(
-  () => nodesStores.defs.filter(def => def.completed).length
-)
 
 const exportProject = () => {
   const defs = nodesStores.defs
@@ -28,14 +24,9 @@ const exportProject = () => {
 <template>
   <main>
     <h2>Export</h2>
+    <Progression />
 
-    <section>
-      <h3 style="font-size: 1.25rem">{{ aboutStore.about.name }}</h3>
-      <p>已翻译 {{ completed }} / {{ total }} 条</p>
-      <progress :max="total" :value="completed" style="width: 100%"></progress>
-    </section>
-
-    <section class="download">
+    <section class="card">
       <h3>保存项目</h3>
       <p>
         保存当前项目，储存为
@@ -46,7 +37,7 @@ const exportProject = () => {
       </button>
     </section>
 
-    <section class="output">
+    <section class="card">
       <h3>生成模组</h3>
       <p>输出当前项目，生成 Mod 文件夹压缩包，<br />这适用于发布 Mod 文件。</p>
       <p>
@@ -69,23 +60,6 @@ const exportProject = () => {
 </template>
 
 <style scoped>
-section {
-  margin-bottom: 32px;
-  border: 1px solid var(--light-border);
-  padding: 16px 24px;
-  border-radius: 8px;
-  background-color:  var(--panel);
-
-  h3 {
-    font-size: 1rem;
-    margin: 0;
-  }
-
-  p {
-    margin: 0.5em 0;
-  }
-}
-
 .language {
   color: var(--theme);
   font-weight: bold;

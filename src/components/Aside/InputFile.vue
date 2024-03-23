@@ -1,61 +1,31 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
-import { Icon } from '@/components/common'
-import { useAboutStore } from '@/stores/about'
+import { IconLabel } from '@/components/common'
 import { loadFile } from '@/helper/InputFile'
-
-const aboutStore = useAboutStore()
-const projectName = computed(() => aboutStore.about.name)
-
-const router = useRouter()
-function handle(event: Event) {
-  loadFile(event)
-  router.replace('/defs')
-}
 </script>
 
 <template>
-  <section :class="!projectName && 'warn'">
+  <section class="card">
     <div class="input-label">
-      <icon :type="projectName ? 'project' : 'folder'" />
-      <span class="project-name">{{ projectName || '点击上传文件' }}</span>
+      <icon-label icon="folder" text="加载新项目" />
     </div>
 
-    <input @change="handle" type="file" accept=".zip, .rnp" />
+    <input @change="loadFile" type="file" accept=".zip, .rnp" />
   </section>
 </template>
 
 <style scoped>
 section {
   position: relative;
-  margin: 0 -8px;
-  padding: 8px;
   display: flex;
   flex-direction: column;
   border-radius: 6px;
-  transition: 0.2s;
-
-  &.warn {
-    outline-offset: -2px;
-    outline: 2px solid gray;
-  }
 }
 
-/* show */
+/* real show */
 .input-label {
   display: flex;
   gap: 0.5em;
   align-items: center;
-}
-
-.project-name {
-  height: 24px; /* line-height */
-  flex-grow: 1;
-  text-wrap: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-weight: bold;
 }
 
 /* native */
