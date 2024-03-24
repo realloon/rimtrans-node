@@ -5,18 +5,13 @@ const props = defineProps<{
 }>()
 
 const html = computed(() => {
-  const colorTagRegex: RegExp = /<color=#([a-fA-F0-9]{6})>(.*?)<\/color>/gi
+  const regex = /<color=(#[a-fA-F0-9]{6})>(.*?)<\/color>/gi
 
-  let convertedText: string = (props.text as string).replace(
-    colorTagRegex,
-    (_, colorCode, innerText) => {
-      return `<span style="color: #${colorCode};">${innerText}</span>`
-    }
+  const convertedText = props.text.replace(regex, (_, color, text) => 
+    `<span style="color: ${color};">${text}</span>`
   )
 
-  convertedText = convertedText.replace(/\\n/g, '<br />')
-
-  return convertedText
+  return convertedText.replace(/\\n/g, '<br />')
 })
 </script>
 
