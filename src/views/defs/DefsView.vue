@@ -59,9 +59,9 @@ onUnmounted(() => app.removeEventListener('scroll', throttleScroll))
           :text="def.translated"
         />
       </fieldset>
-    </form>
 
-    <div class="spacer"></div>
+      <div class="spacer"></div>
+    </form>
   </main>
 </template>
 
