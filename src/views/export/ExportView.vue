@@ -24,6 +24,7 @@ const exportProject = () => {
 <template>
   <main>
     <h2>Export</h2>
+    
     <Progression />
 
     <section class="card">

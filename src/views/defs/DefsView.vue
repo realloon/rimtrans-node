@@ -3,7 +3,6 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import AutoTextarea from '@/components/AutoTextarea.vue'
 import Preview from './Preview.vue'
-import Pagination from './Pagination.vue'
 import { useNodesStore } from '@/stores/nodes'
 
 const nodesStore = useNodesStore()
@@ -53,12 +52,6 @@ const pagedDefs = computed(() => {
         />
       </fieldset>
     </form>
-
-    <Pagination
-      :currentPage="currentPage"
-      :totalPage="totalPage"
-      @update:currentPage="value => (currentPage = value)"
-    />
 
     <div class="spacer"></div>
   </main>
