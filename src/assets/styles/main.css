@@ -41,8 +41,7 @@ main {
   box-sizing: border-box;
   width: 100%;
   max-width: 640px;
-  max-height: 100vh;
-  padding: 16px 16px;
+  padding: 16px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

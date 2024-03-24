@@ -1,20 +1,36 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import AutoTextarea from '@/components/AutoTextarea.vue'
 import Preview from './Preview.vue'
 import { useProjectStore } from '@/stores/project'
+import { throttle } from '@/utils/index'
 
 const project = useProjectStore()
 const route = useRoute()
 
-const defs = computed(
-  () =>
-    (route.params.category !== ''
-      ? project.defs.filter(def => def.folder === route.params.category)
-      : project.defs
-    ).filter(def => def.tagName !== '') // Unresolved abstract inheritance fields.
+const counter = ref(1)
+const defs = computed(() =>
+  (route.params.category !== ''
+    ? project.defs.filter(def => def.folder === route.params.category)
+    : project.defs
+  )
+    .filter(def => def.tagName !== '') // Unresolved abstract inheritance fields.
+    .slice(0, counter.value * 20)
 )
+
+const app = document.querySelector('#app') as Element
+
+const isNearBottom = () =>
+  app.scrollHeight - app.scrollTop - app.clientHeight < app.clientHeight
+
+const throttleScroll = throttle(
+  () => isNearBottom() && (counter.value += 1),
+  300
+)
+
+onMounted(() => app.addEventListener('scroll', throttleScroll))
+onUnmounted(() => app.removeEventListener('scroll', throttleScroll))
 </script>
 
 <template>
