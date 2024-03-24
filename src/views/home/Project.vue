@@ -2,6 +2,8 @@
 import Progression from '@/components/Progression.vue'
 import InputFile from '@/components/InputFile.vue'
 import { IconLabel } from '@/components/common'
+import { useProjectStore } from '@/stores/project'
+const project = useProjectStore()
 
 function clear() {
   if (!confirm('这会将当前项目清空，且删除浏览器本地缓存！')) return
@@ -14,6 +16,8 @@ function clear() {
 <template>
   <h2>Project (WIP)</h2>
 
+  <img :src="project.cover" alt="">
+
   <Progression />
 
   <section class="buttons">
@@ -25,6 +29,10 @@ function clear() {
 </template>
 
 <style scoped>
+img {
+  border-radius: 8px;
+}
+
 .buttons {
   display: flex;
   gap: 1rem;

@@ -14,7 +14,7 @@ function extractProject(source: string | ArrayBuffer): Promise<Project> {
     if (typeof source === 'string') {
       resolve(JSON.parse(source))
     } else {
-      const { defXmls, aboutXml } = await extractXmlsFromZip(source)
+      const { defXmls, aboutXml, cover } = await extractXmlsFromZip(source)
       const nodes = await extractNodesFromXmls(defXmls)
 
       const defs: Def[] = nodes.map(node => ({
@@ -29,6 +29,7 @@ function extractProject(source: string | ArrayBuffer): Promise<Project> {
       resolve({
         defs,
         about: xmlToAbout(aboutXml),
+        cover,
       })
     }
   })

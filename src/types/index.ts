@@ -19,4 +19,5 @@ export type About = {
 export type Project = {
   defs: Array<Def>
   about: About
+  cover: string
 }
