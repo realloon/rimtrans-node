@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { nanoid } from 'nanoid'
 import { Icon, IconLabel } from './common'
 import { ref } from 'vue'
 const props = defineProps<{

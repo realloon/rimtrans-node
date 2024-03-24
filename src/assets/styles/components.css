@@ -1,0 +1,15 @@
+.card {
+  border: 1px solid var(--light-border);
+  padding: 16px 24px;
+  border-radius: 8px;
+  background-color: var(--panel);
+/* 
+  h3 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  p {
+    margin: 0.5em 0;
+  } */
+}

@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, withDefaults } from 'vue'
 
-interface Props {
-  modelValue: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-})
+const props = withDefaults(
+  defineProps<{
+    modelValue: string
+  }>(),
+  {
+    modelValue: '',
+  }
+)
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void

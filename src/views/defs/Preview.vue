@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-const props = defineProps({
-  text: String,
-})
+const props = defineProps<{
+  text: string
+}>()
 
 const html = computed(() => {
   const colorTagRegex: RegExp = /<color=#([a-fA-F0-9]{6})>(.*?)<\/color>/gi
