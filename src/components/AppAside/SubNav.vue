@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { useNodesStore } from '@/stores/nodes'
-const { categories } = useNodesStore()
+import { useProjectStore } from '@/stores/project'
+const project = useProjectStore()
 </script>
 <template>
   <nav class="sub-menu">
     <router-link
-      v-for="category in categories"
-      :key="category"
+      v-for="category in project.categories"
       :to="`/defs/${category}`"
-      >{{ category }}</router-link
     >
+      {{ category }}
+    </router-link>
   </nav>
 </template>
 

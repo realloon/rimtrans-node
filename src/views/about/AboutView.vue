@@ -2,10 +2,10 @@
 import { IconLabel } from '@/components/common'
 import InputBox from '@/components/InputBox.vue'
 import EditList from '@/components/EditList.vue'
-import { useAboutStore } from '@/stores/about'
+import { useProjectStore } from '@/stores/project'
 
-const aboutStore = useAboutStore()
-const about = aboutStore.about
+const project = useProjectStore()
+const about = project.about
 </script>
 
 <template>
@@ -23,6 +23,7 @@ const about = aboutStore.about
             label="名称"
             v-model.trim="about.name"
             placeholder="输入项目名称"
+            name="project"
           />
 
           <input-box
@@ -30,18 +31,22 @@ const about = aboutStore.about
             v-model.trim="about.packageId"
             placeholder="输入项目包名"
             style="font-family: var(--mono)"
+            name="package"
           />
 
           <input-box
             label="作者"
             v-model.trim="about.author"
             placeholder="输入你的名字"
+            name="name"
+            autocomplete="true"
           />
 
           <input-box
             label="描述"
             v-model.trim="about.description"
             placeholder="输入该翻译模组的描述"
+            name="description"
           />
         </div>
       </fieldset>
@@ -96,7 +101,7 @@ legend {
 }
 
 .wrapper {
-  background-color:  var(--panel);
+  background-color: var(--panel);
   padding: 1rem;
   border: 1px solid var(--light-border);
   margin-top: 0.5em;

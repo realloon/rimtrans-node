@@ -1,30 +1,25 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { IconLabel } from '@/components/common'
-import { useNodesStore } from '@/stores/nodes'
-import { useAboutStore } from '@/stores/about'
+import { useProjectStore } from '@/stores/project'
 import Progression from '@/components/Progression.vue'
 import saveFile from '@/utils/saveFile'
 import { outputMod } from '@/helper/ExportView'
 
-const nodesStores = useNodesStore()
-const aboutStore = useAboutStore()
+const { defs, about } = useProjectStore()
 
 const language = ref('ChineseSimplified')
 const languages = { ChineseSimplified: '简体中文' }
 
 const exportProject = () => {
-  const defs = nodesStores.defs
-  const about = aboutStore.about
-
-  saveFile(`${about?.name}_${Date.now()}.rnp`, JSON.stringify({ defs, about }))
+  saveFile(`${about.name}_${Date.now()}.rnp`, JSON.stringify({ defs, about }))
 }
 </script>
 
 <template>
   <main>
     <h2>Export</h2>
-    
+
     <Progression />
 
     <section class="card">

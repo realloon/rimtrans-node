@@ -1,26 +1,23 @@
 import JSZip from 'jszip'
-import { useAboutStore } from '@/stores/about'
-import { useNodesStore } from '@/stores/nodes'
+import { useProjectStore } from '@/stores/project'
 import { aboutXml, defsXml } from '@/template'
 import { saveFile } from '@/utils'
 
 export default async function outputMod(language: string) {
   const zip = new JSZip()
 
-  // about
-  const aboutStore = useAboutStore()
-  const about = aboutStore.about
-  zip.file('/about/About.xml', aboutXml(about))
+  const { defs, about, categories } = useProjectStore()
 
   // defs
-  const nodesStores = useNodesStore()
-  const defs = nodesStores.defs
-  nodesStores.categories.forEach(category => {
+  categories.forEach(category => {
     const path = `/Languages/${language}/DefInjected/${category}/${category}.xml`
     const content = defsXml(defs.filter(def => def.folder === category))
 
     zip.file(path, content)
   })
+
+  // about
+  zip.file('/about/About.xml', aboutXml(about))
 
   saveFile(
     `${about.name}_${Date.now()}`,

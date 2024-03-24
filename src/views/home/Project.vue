@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Progression from '@/components/Progression.vue'
-import InputFile from '@/components/Aside/InputFile.vue'
+import InputFile from '@/components/InputFile.vue'
 
 function clear() {
   const isConfirm = confirm('这会将当前项目清空，且删除浏览器本地缓存！')

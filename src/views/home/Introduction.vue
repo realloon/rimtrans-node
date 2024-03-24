@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import logo from '@/assets/images/logo.png'
 import chat from '@/assets/images/chat.png'
 import { Icon } from '@/components/common'
-import InputFile from '@/components/Aside/InputFile.vue'
+import InputFile from '@/components/InputFile.vue'
 
 const version = ref('0.0.0')
 

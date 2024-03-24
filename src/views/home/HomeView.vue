@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import Introduction from './Introduction.vue'
 import Project from './Project.vue'
-import { useAboutStore } from '@/stores/about'
-const aboutStore = useAboutStore()
+import { useProjectStore } from '@/stores/project'
+const project = useProjectStore()
 </script>
 
 <template>
   <main>
-    <Introduction v-if="!(aboutStore.about.name !== '')" />
-    <Project v-if="aboutStore.about.name !== ''" />
+    <Introduction v-if="!(project.about.name !== '')" />
+    <Project v-if="project.about.name !== ''" />
   </main>
 </template>
 

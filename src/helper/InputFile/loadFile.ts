@@ -1,5 +1,4 @@
-import { useNodesStore } from '@/stores/nodes'
-import { useAboutStore } from '@/stores/about'
+import { useProjectStore } from '@/stores/project'
 
 import readFile from './readFile'
 import extractProject from './extractProject'
@@ -10,11 +9,8 @@ export default async function loadFile(event: Event) {
   if (!file) return
 
   const content = await readFile(file)
-  const { defs, about } = await extractProject(content)
+  const project = await extractProject(content)
 
-  const nodesStore = useNodesStore()
-  nodesStore.replace(defs)
-
-  const aboutStore = useAboutStore()
-  aboutStore.replace(about)
+  const projectStore = useProjectStore()
+  projectStore.update(project)
 }

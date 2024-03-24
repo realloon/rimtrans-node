@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import AppAside from './components/Aside/AppAside.vue'
+import AppAside from './components/AppAside/AppAside.vue'
 </script>
 
 <template>

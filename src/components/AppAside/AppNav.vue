@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import SubNav from './SubNav.vue'
 import { Icon, IconLabel } from '../common'
-import { useNodesStore } from '@/stores/nodes'
-import { useAboutStore } from '@/stores/about'
-const { categories } = useNodesStore()
-const aboutStore = useAboutStore()
+import { useProjectStore } from '@/stores/project'
+const project = useProjectStore()
 </script>
 
 <template>
-  <nav class="menu" v-show="categories.size > 0">
+  <nav class="menu" v-show="project.categories.size > 0">
     <router-link class="project-wrapper" to="/">
       <Icon type="project" />
-      <span class="project-name">{{ aboutStore.about.name }}</span>
+      <span class="project-name">{{ project.about.name }}</span>
     </router-link>
 
     <section>

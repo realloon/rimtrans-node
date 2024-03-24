@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  modelValue: ''
+  modelValue: string
   label: string
 }>()
 
@@ -16,7 +16,11 @@ function updateValue(event: Event) {
 
 <template>
   <label>
-    <input :value="modelValue" @input="updateValue" v-bind="$attrs" />
+    <input
+      :value="modelValue"
+      @input="updateValue"
+      v-bind="$attrs"
+    />
     <span>{{ label }}</span>
   </label>
 </template>
