@@ -21,7 +21,7 @@ export const useProjectStore = defineStore('project', () => {
 
   const about = reactive<About>(local?.about || defaultAbout)
 
-  const categories = computed(() => new Set(defs.map(def => def.folder)))
+  const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
 
   const $reset = () => {
     defs.length = 0
@@ -29,7 +29,10 @@ export const useProjectStore = defineStore('project', () => {
 
   const update = ({ defs: sourceDefs, about: sourceAbout }: Project) => {
     $reset()
+    // defs
     sourceDefs.forEach(def => defs.push(def))
+    defs.sort(({ tagName: pre }, { tagName: cur }) => pre.localeCompare(cur))
+    // about
     Object.assign(about, sourceAbout)
   }
 
