@@ -5,3 +5,12 @@
   background-color: var(--panel);
 }
 
+button {
+  font-size: .85rem;
+  padding: 0.5em 1em;
+  border: none;
+  background-color: var(--page);
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+}

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Progression from '@/components/Progression.vue'
 import InputFile from '@/components/InputFile.vue'
+import { IconLabel } from '@/components/common'
 
 function clear() {
-  const isConfirm = confirm('这会将当前项目清空，且删除浏览器本地缓存！')
-  if (!isConfirm) return
+  if (!confirm('这会将当前项目清空，且删除浏览器本地缓存！')) return
+
   localStorage.clear()
   location.reload()
 }
@@ -13,33 +14,29 @@ function clear() {
 <template>
   <h2>Project (WIP)</h2>
 
-  <div>
-    <Progression />
+  <Progression />
 
+  <section class="buttons">
     <input-file />
-
-    <section class="card clear">
-      <button @click="clear">清空工作区</button>
-    </section>
-  </div>
+    <button @click="clear">
+      <icon-label icon="close0" text="清空工作区" />
+    </button>
+  </section>
 </template>
 
 <style scoped>
-div {
+.buttons {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+  gap: 1rem;
 
-.clear {
-  width: fit-content;
-
-  & button {
-    padding: 0;
-    border: none;
-    background-color: inherit;
-    font-weight: bold;
-    cursor: pointer;
+  & > button {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    transition: 0.4s;
+    &:hover {
+      color: var(--warn);
+      outline-color: var(--warn);
+    }
   }
 }
 </style>

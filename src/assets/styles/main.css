@@ -5,6 +5,7 @@
   /* color */
   --theme: #5c95ba;
   --black: #1e1e1e;
+  --warn: #f44336;
 
   /* Color theme */
   --font: var(--black);

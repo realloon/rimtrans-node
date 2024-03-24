@@ -4,19 +4,16 @@ import { loadFile } from '@/helper/InputFile'
 </script>
 
 <template>
-  <section>
+  <button>
     <icon-label icon="folder" text="加载新项目" />
 
     <input @change="loadFile" type="file" accept=".zip, .rnp" />
-  </section>
+  </button>
 </template>
 
 <style scoped>
-section {
+button {
   position: relative;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  background-color: var(--panel);
 }
 
 /* native */
@@ -28,5 +25,9 @@ input {
   right: 0;
   opacity: 0;
   cursor: pointer;
+
+  &::-webkit-file-upload-button {
+    display: none;
+  }
 }
 </style>

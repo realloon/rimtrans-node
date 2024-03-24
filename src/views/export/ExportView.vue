@@ -62,21 +62,4 @@ const exportProject = () => {
   font-family: var(--mono);
   padding: 0 1em;
 }
-
-button {
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 32px;
-  padding: 0 0.5em;
-  border: 1px solid var(--light-border);
-  border-radius: 4px;
-  background-color: var(--page);
-  cursor: pointer;
-  transition: 0.2s;
-
-  &:hover {
-    color: var(--page);
-    background-color: var(--theme);
-  }
-}
 </style>

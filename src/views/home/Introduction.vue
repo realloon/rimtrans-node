@@ -70,7 +70,7 @@ img {
 
 /* tmpl */
 .warn {
-  color: #f44336;
+  color: var(--warn);
   font-weight: bold;
 }
 .chat {
