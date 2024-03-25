@@ -6,11 +6,25 @@
 }
 
 button {
-  font-size: .85rem;
+  font-size: 0.85rem;
   padding: 0.5em 1em;
   border: none;
   background-color: var(--page);
   font-weight: bold;
   cursor: pointer;
   border-radius: 8px;
+  /* transition */
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  transition: 0.4s;
+
+  &.theme:hover {
+    color: var(--theme);
+    outline-color: var(--theme);
+  }
+
+  &.warn:hover {
+    color: var(--warn);
+    outline-color: var(--warn);
+  }
 }

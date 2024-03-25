@@ -21,9 +21,11 @@ export const useProjectStore = defineStore('project', () => {
 
   const about = reactive<About>(local?.about || defaultAbout)
 
-  const cover = ref('')
+  const cover = ref<Blob | null>(null)
 
   const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
+
+  const hasProject = computed(() => defs.length > 0)
 
   const $reset = () => {
     defs.length = 0
@@ -56,5 +58,5 @@ export const useProjectStore = defineStore('project', () => {
     debounceSave()
   })
 
-  return { defs, about, cover, categories, update }
+  return { defs, about, cover, categories, hasProject, update }
 })

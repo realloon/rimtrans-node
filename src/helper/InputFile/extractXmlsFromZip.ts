@@ -3,7 +3,7 @@ import JSZip from 'jszip'
 type Xmls = {
   defXmls: Array<string>
   aboutXml: string
-  cover: string
+  cover: Blob
 }
 
 const regexs = {
@@ -54,9 +54,9 @@ const extractXmlsFromZip = async (zip: ArrayBuffer): Promise<Xmls> => {
   const aboutXmlPromise = aboutEntry.async('string')
 
   // cover
-  const coverEntrt = entries.find(isCoverFile)?.[1]
-  if (!coverEntrt) throw new Error('No valid preview.png file found.')
-  const cover = (await readAsDataUrl(coverEntrt.async('blob'))) as string
+  const coverEnter = entries.find(isCoverFile)?.[1]
+  if (!coverEnter) throw new Error('No valid preview.png file found.')
+  const cover = await coverEnter.async('blob')
 
   const [defXmls, aboutXml] = await Promise.all([
     Promise.all(defXmlPromises),
@@ -65,15 +65,5 @@ const extractXmlsFromZip = async (zip: ArrayBuffer): Promise<Xmls> => {
 
   return { defXmls, aboutXml, cover }
 }
-
-const readAsDataUrl = (blob: Promise<Blob>) =>
-  new Promise(async (resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(await blob)
-
-    reader.onload = () => resolve(reader.result)
-
-    reader.onerror = err => reject(err)
-  })
 
 export default extractXmlsFromZip

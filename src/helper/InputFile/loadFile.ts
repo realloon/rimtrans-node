@@ -1,5 +1,4 @@
 import { useProjectStore } from '@/stores/project'
-
 import readFile from './readFile'
 import extractProject from './extractProject'
 

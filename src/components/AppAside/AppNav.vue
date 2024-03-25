@@ -6,7 +6,7 @@ const project = useProjectStore()
 </script>
 
 <template>
-  <nav class="menu" v-show="project.categories.size > 0">
+  <nav class="menu" v-show="project.hasProject ">
     <router-link class="project-wrapper" to="/">
       <Icon type="project" />
       <span class="project-name">{{ project.about.name }}</span>
