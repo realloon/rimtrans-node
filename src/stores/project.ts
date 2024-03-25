@@ -21,7 +21,7 @@ export const useProjectStore = defineStore('project', () => {
 
   const about = reactive<About>(local?.about || defaultAbout)
 
-  const cover = ref<Blob | null>(null)
+  const cover = ref('')
 
   const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
 
@@ -43,7 +43,7 @@ export const useProjectStore = defineStore('project', () => {
     // about
     Object.assign(about, sourceAbout)
     // cover
-    cover.value = sourceCover
+    cover.value = URL.createObjectURL(sourceCover)
   }
 
   // Local cache

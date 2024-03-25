@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import Progression from '@/components/Progression.vue'
 import InputFile from '@/components/InputFile.vue'
 import { IconLabel } from '@/components/common'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()
-
-const cover = computed<string | undefined>(() =>
-  project.cover ? URL.createObjectURL(project.cover) : undefined
-)
 
 function clear() {
   if (!confirm('这会将当前项目清空，且删除浏览器本地缓存！')) return
@@ -21,7 +16,7 @@ function clear() {
 <template>
   <h2>Project (WIP)</h2>
 
-  <img :src="cover" alt="" />
+  <img :src="project.cover" alt="" />
 
   <Progression />
 
@@ -35,6 +30,8 @@ function clear() {
 
 <style scoped>
 img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 8px;
 }
 

@@ -28,7 +28,7 @@ const exportProject = () => {
         保存当前项目，储存为
         <code>.rnp</code> 项目文件，<br />这适用于在不同设备间同步进度。
       </p>
-      <button @click="exportProject">
+      <button @click="exportProject" class="theme">
         <icon-label icon="download" text="保存" size="21" />
       </button>
     </section>
@@ -48,7 +48,7 @@ const exportProject = () => {
         </select>
         <span class="language">{{ language }}</span>
       </p>
-      <button @click="outputMod(language)">
+      <button @click="outputMod(language)" class="theme">
         <icon-label icon="export" text="生成" size="20" />
       </button>
     </section>
@@ -56,6 +56,13 @@ const exportProject = () => {
 </template>
 
 <style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
 .language {
   color: var(--theme);
   font-weight: bold;
