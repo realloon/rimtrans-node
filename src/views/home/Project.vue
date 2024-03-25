@@ -16,7 +16,9 @@ function clear() {
 <template>
   <h2>Project (WIP)</h2>
 
-  <img :src="project.cover" alt="" />
+  <div class="cover">
+    <img :src="project.coverUrl" alt="" />
+  </div>
 
   <Progression />
 
@@ -29,10 +31,13 @@ function clear() {
 </template>
 
 <style scoped>
-img {
-  width: 100%;
+.cover {
   aspect-ratio: 16 / 9;
-  border-radius: 8px;
+
+  & > img {
+    display: block;
+    width: 100%;
+  }
 }
 
 .buttons {

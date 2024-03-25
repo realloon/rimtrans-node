@@ -2,6 +2,7 @@ import type { Def, About, Project } from '@/types'
 import { ref, reactive, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { debounce } from '@/utils'
+import imgsDB from './imgs'
 
 const defaultAbout = {
   name: '',
@@ -21,7 +22,12 @@ export const useProjectStore = defineStore('project', () => {
 
   const about = reactive<About>(local?.about || defaultAbout)
 
-  const cover = ref('')
+  const cover = ref<Blob | null>(null)
+  imgsDB.get('cover').then(coverBlob => (cover.value = coverBlob))
+
+  const coverUrl = computed(() =>
+    cover.value ? URL.createObjectURL(cover.value) : ''
+  )
 
   const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
 
@@ -43,20 +49,21 @@ export const useProjectStore = defineStore('project', () => {
     // about
     Object.assign(about, sourceAbout)
     // cover
-    cover.value = URL.createObjectURL(sourceCover)
+    cover.value = sourceCover
   }
 
   // Local cache
-  const debounceSave = debounce(() => {
-    const project = {
-      defs,
-      about,
-    }
-    localStorage.setItem('rn-workspace-project', JSON.stringify(project))
-  }, 600)
-  watch([defs, about], () => {
-    debounceSave()
-  })
+  watch(
+    [defs, about],
+    debounce(() => {
+      localStorage.setItem(
+        'rn-workspace-project',
+        JSON.stringify({ defs, about })
+      )
+    }, 600)
+  )
 
-  return { defs, about, cover, categories, hasProject, update }
+  watch(cover, value => value && imgsDB.set('cover', value))
+
+  return { defs, about, cover, coverUrl, categories, hasProject, update }
 })
