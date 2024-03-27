@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SubNav from './SubNav.vue'
-import { Icon, IconLabel } from '../common'
+import { Icon, IconLabel } from '../'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()
 </script>

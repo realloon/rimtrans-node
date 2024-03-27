@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IconLabel } from '@/components/common'
+import { IconLabel } from '@/components'
 import { useProjectStore } from '@/stores/project'
 import Progression from '@/components/Progression.vue'
 import saveFile from '@/utils/saveFile'

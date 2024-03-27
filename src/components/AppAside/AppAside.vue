@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppNav from './AppNav.vue'
 import ToolBar from './ToolBar.vue'
-import { Spacer } from '../common'
+import { Spacer } from '../'
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconLabel } from '@/components/common'
+import { IconLabel } from '@/components'
 import { loadFile } from '@/helper/InputFile'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()

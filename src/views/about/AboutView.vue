@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { IconLabel } from '@/components/common'
-import InputBox from '@/components/InputBox.vue'
-import EditList from '@/components/EditList.vue'
+import { IconLabel, InputBox, EditList } from '@/components'
 import { useProjectStore } from '@/stores/project'
 
 const project = useProjectStore()

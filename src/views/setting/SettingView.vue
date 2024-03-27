@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EditList from '@/components/EditList.vue'
+import {EditList} from '@/components'
 import { useSettingStore } from '@/stores/setting'
 const setting = useSettingStore()
 </script>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import AutoTextarea from '@/components/AutoTextarea.vue'
+import {AutoTextarea} from '@/components'
 import Preview from './Preview.vue'
 import { useProjectStore } from '@/stores/project'
 import { throttle } from '@/utils/index'

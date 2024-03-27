@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import logo from '@/assets/images/logo.png'
 import chat from '@/assets/images/chat.png'
-import { Icon } from '@/components/common'
-import InputFile from '@/components/InputFile.vue'
+import { Icon, InputFile } from '@/components'
 
 const version = ref('0.0.0')
 
-onMounted(() => {
-  const url =
-    'https://raw.githubusercontent.com/realloon/rimtrans-node/main/package.json'
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => (version.value = data.version))
-})
+fetch(
+  'https://raw.githubusercontent.com/realloon/rimtrans-node/main/package.json'
+)
+  .then(res => res.json())
+  .then(data => (version.value = data.version))
 </script>
 
 <template>
@@ -29,7 +25,7 @@ onMounted(() => {
       <icon type="project" /> .rnp 项目文件。
     </p>
     <p class="warn">
-      <icon type="error" /> Rimtrans Node 正处于早期开发阶段，<br />为避免意外情况，请勿用于正式翻译项目。
+      Rimtrans Node 正处于早期开发阶段，<br />为避免意外情况，请勿用于正式翻译项目。
     </p>
     <div class="chat">
       <span>710882819</span>

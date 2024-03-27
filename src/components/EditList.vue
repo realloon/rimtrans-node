@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon, IconLabel } from './common'
+import { Icon, IconLabel } from './'
 import { ref } from 'vue'
 const props = defineProps<{
   icon: string

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Progression from '@/components/Progression.vue'
 import InputFile from '@/components/InputFile.vue'
-import { IconLabel } from '@/components/common'
+import { IconLabel } from '@/components'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()
 
