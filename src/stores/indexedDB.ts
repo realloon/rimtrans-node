@@ -21,6 +21,7 @@ function openDatabase(): Promise<IDBDatabase> {
 
 async function set(id: string, blob: Blob): Promise<void> {
   const db = await openDatabase()
+
   const transaction = db.transaction('imgs', 'readwrite')
   const store = transaction.objectStore('imgs')
 

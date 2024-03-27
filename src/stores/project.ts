@@ -2,7 +2,7 @@ import type { Def, About, Project } from '@/types'
 import { ref, reactive, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { debounce } from '@/utils'
-import imgsDB from './imgs'
+import indexedDB from './indexedDB'
 
 const defaultAbout = {
   name: '',
@@ -23,7 +23,7 @@ export const useProjectStore = defineStore('project', () => {
   const about = reactive<About>(local?.about || defaultAbout)
 
   const cover = ref<Blob | null>(null)
-  imgsDB.get('cover').then(coverBlob => (cover.value = coverBlob))
+  indexedDB.get('cover').then(coverBlob => (cover.value = coverBlob))
 
   const coverUrl = computed(() =>
     cover.value ? URL.createObjectURL(cover.value) : ''
@@ -63,7 +63,7 @@ export const useProjectStore = defineStore('project', () => {
     }, 600)
   )
 
-  watch(cover, value => value && imgsDB.set('cover', value))
+  watch(cover, value => value && indexedDB.set('cover', value))
 
   return { defs, about, cover, coverUrl, categories, hasProject, update }
 })
