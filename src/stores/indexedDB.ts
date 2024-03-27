@@ -49,7 +49,7 @@ async function set<T>(
 async function get<T>(
   storeName: StoreNames,
   key?: string
-): Promise<{ id: string; value: T } | null> {
+): Promise<T | { id: string; value: T } | null> {
   const db = await openDatabase()
   const transaction = db.transaction(storeName, 'readonly')
   const store = transaction.objectStore(storeName)

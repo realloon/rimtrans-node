@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { IconLabel } from '@/components'
 import { useProjectStore } from '@/stores/project'
+import indexedDB from '@/stores/indexedDB'
 import Progression from '@/components/Progression.vue'
 import saveFile from '@/utils/saveFile'
 import { outputMod } from '@/helper/ExportView'
@@ -11,9 +12,7 @@ const { defs, about } = useProjectStore()
 const language = ref('ChineseSimplified')
 const languages = { ChineseSimplified: '简体中文' }
 
-const exportProject = () => {
-  saveFile(`${about.name}_${Date.now()}.rnp`, JSON.stringify({ defs, about }))
-}
+const exportProject = async () => {}
 </script>
 
 <template>
