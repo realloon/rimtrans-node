@@ -46,7 +46,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <textarea ref="textareaRef" :value="modelValue" @input="updateModelValue" />
+  <textarea
+    ref="textareaRef"
+    :value="modelValue"
+    @input="updateModelValue"
+    name="filed"
+  ></textarea>
 </template>
 
 <style scoped>
@@ -54,19 +59,18 @@ textarea {
   box-sizing: border-box;
   width: 100%;
   padding: 1em;
+  border: none;
+  border-radius: 8px;
+  outline-offset: -1px;
   font-size: 1rem;
   line-height: 1.5;
   font-family: var(--mono);
+  background-color: var(--panel);
   resize: none;
   overflow: hidden;
-  background-color: var(--panel);
-  border: 1px solid var(--light-border);
-  border-radius: 8px;
-  outline-color: var(--theme);
-  outline: none;
 }
 
 textarea:focus {
-  border-color: var(--theme);
+  outline-color: var(--theme);
 }
 </style>

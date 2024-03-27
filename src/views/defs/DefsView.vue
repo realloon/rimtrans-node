@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import {AutoTextarea} from '@/components'
+import { AutoTextarea } from '@/components'
 import Preview from './Preview.vue'
 import { useProjectStore } from '@/stores/project'
-import { throttle } from '@/utils/index'
+import useScrollLoad from '@/hooks/useScrollLoad'
 
 const project = useProjectStore()
 const route = useRoute()
+const { counter } = useScrollLoad()
 
-const counter = ref(1)
 const defs = computed(() =>
   (route.params.category !== ''
     ? project.defs.filter(def => def.folder === route.params.category)
@@ -18,24 +18,12 @@ const defs = computed(() =>
     .filter(def => def.tagName !== '') // Unresolved abstract inheritance fields.
     .slice(0, counter.value * 20)
 )
-
-const app = document.querySelector('#app') as Element
-
-const isNearBottom = () =>
-  app.scrollHeight - app.scrollTop - app.clientHeight < app.clientHeight
-
-const throttleScroll = throttle(
-  () => isNearBottom() && (counter.value += 1),
-  300
-)
-
-onMounted(() => app.addEventListener('scroll', throttleScroll))
-onUnmounted(() => app.removeEventListener('scroll', throttleScroll))
 </script>
 
 <template>
   <main>
     <h2>{{ route.params.category || 'All Defs' }}</h2>
+    <p>{{ counter }}</p>
     <form>
       <fieldset v-for="def in defs" :key="def.id">
         <legend>
@@ -52,7 +40,6 @@ onUnmounted(() => app.removeEventListener('scroll', throttleScroll))
         <auto-textarea
           v-model="def.translated"
           :placeholder="def.content"
-          name="filed"
         />
         <preview
           v-if="def.translated?.includes('\\n')"
