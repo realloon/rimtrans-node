@@ -14,6 +14,7 @@ const defaultAbout = {
 }
 
 export const useProjectStore = defineStore('project', () => {
+  /* localStorage reading speed seems faster. */
   const local: Project | null = JSON.parse(
     localStorage.getItem('rn-workspace-project') as string
   )
@@ -23,7 +24,9 @@ export const useProjectStore = defineStore('project', () => {
   const about = reactive<About>(local?.about || defaultAbout)
 
   const cover = ref<Blob | null>(null)
-  indexedDB.get('cover').then(coverBlob => (cover.value = coverBlob))
+  indexedDB.get<Blob>('cover').then(source => {
+    source && (cover.value = source.value)
+  })
 
   const coverUrl = computed(() =>
     cover.value ? URL.createObjectURL(cover.value) : ''
@@ -35,6 +38,7 @@ export const useProjectStore = defineStore('project', () => {
 
   const $reset = () => {
     defs.length = 0
+    indexedDB.clearAll()
   }
 
   const update = ({
@@ -44,12 +48,17 @@ export const useProjectStore = defineStore('project', () => {
   }: Project) => {
     $reset()
     // defs
-    sourceDefs.forEach(def => defs.push(def))
+    sourceDefs.forEach(def => {
+      defs.push(def)
+      indexedDB.set('defs', def, def.id)
+    })
     defs.sort(({ tagName: pre }, { tagName: cur }) => pre.localeCompare(cur))
     // about
     Object.assign(about, sourceAbout)
+    indexedDB.set('about', sourceAbout)
     // cover
     cover.value = sourceCover
+    indexedDB.set('cover', sourceCover)
   }
 
   // Local cache
@@ -62,8 +71,6 @@ export const useProjectStore = defineStore('project', () => {
       )
     }, 600)
   )
-
-  watch(cover, value => value && indexedDB.set('cover', value))
 
   return { defs, about, cover, coverUrl, categories, hasProject, update }
 })

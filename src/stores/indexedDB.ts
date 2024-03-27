@@ -1,12 +1,17 @@
+type StoreNames = 'defs' | 'about' | 'cover'
+const storeNames: StoreNames[] = ['defs', 'about', 'cover']
+
 function openDatabase(): Promise<IDBDatabase> {
   const request = indexedDB.open('rimtrans-node')
 
   return new Promise((resolve, reject) => {
     request.onupgradeneeded = () => {
       const db = request.result
-      if (!db.objectStoreNames.contains('imgs')) {
-        db.createObjectStore('imgs', { keyPath: 'id' })
-      }
+
+      storeNames.forEach(name => {
+        if (db.objectStoreNames.contains(name)) return
+        db.createObjectStore(name, { keyPath: 'id' })
+      })
     }
 
     request.onsuccess = () => {
@@ -19,14 +24,21 @@ function openDatabase(): Promise<IDBDatabase> {
   })
 }
 
-async function set(id: string, blob: Blob): Promise<void> {
+async function set<T>(
+  storeName: StoreNames,
+  value: T,
+  id?: string
+): Promise<void> {
   const db = await openDatabase()
 
-  const transaction = db.transaction('imgs', 'readwrite')
-  const store = transaction.objectStore('imgs')
+  const transaction = db.transaction(storeName, 'readwrite')
+  const store = transaction.objectStore(storeName)
 
   return new Promise((resolve, reject) => {
-    const request = store.put({ id, image: blob })
+    console.log(value)
+    const request = id
+      ? store.put(Object.assign({ id }, value))
+      : store.put({ id: 'unique', value })
 
     request.onsuccess = () => resolve()
 
@@ -34,19 +46,39 @@ async function set(id: string, blob: Blob): Promise<void> {
   })
 }
 
-async function get(id: string): Promise<Blob | null> {
+async function get<T>(
+  storeName: StoreNames,
+  key?: string
+): Promise<{ id: string; value: T } | null> {
   const db = await openDatabase()
-  const transaction = db.transaction('imgs', 'readonly')
-  const store = transaction.objectStore('imgs')
+  const transaction = db.transaction(storeName, 'readonly')
+  const store = transaction.objectStore(storeName)
 
   return new Promise((resolve, reject) => {
-    const request = store.get(id)
+    const request = store.get(key ?? 'unique')
 
-    request.onsuccess = () =>
-      resolve(request.result ? request.result.image : null)
+    request.onsuccess = () => resolve(request.result ?? null)
 
     request.onerror = () => reject(request.error)
   })
 }
 
-export default { set, get }
+async function clear(storeName: StoreNames): Promise<void> {
+  const db = await openDatabase()
+  const transaction = db.transaction(storeName, 'readwrite')
+  const store = transaction.objectStore(storeName)
+
+  return new Promise((resolve, reject) => {
+    const request = store.clear()
+
+    request.onsuccess = () => resolve(request.result)
+
+    request.onerror = () => reject(request.error)
+  })
+}
+
+async function clearAll() {
+  storeNames.forEach(name => clear(name))
+}
+
+export default { set, get, clearAll }
