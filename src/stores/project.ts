@@ -24,7 +24,7 @@ export const useProjectStore = defineStore('project', () => {
   const about = reactive<About>(local?.about || defaultAbout)
 
   const cover = ref<Blob | null>(null)
-  indexedDB.get<Blob>('cover').then(source => {
+  indexedDB.get('cover').then(source => {
     source && (cover.value = source.value)
   })
 
