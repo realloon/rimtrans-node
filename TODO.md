@@ -15,9 +15,9 @@
 - [x] 字段内容预览；
 - [x] 明暗主题切换；
 - [x] 分页功能；
-- [ ] 重新设计主页；
-- [ ] Defs 自动换页；
-- [ ] Preview 相关功能；
+- [x] 重新设计主页；
+- [x] Defs 滚动加载；
+- [x] Preview 相关功能；
 - [ ] 提取 Patches；
 - [ ] Patches Modle；
 - [ ] Patches 绑定至 View；
