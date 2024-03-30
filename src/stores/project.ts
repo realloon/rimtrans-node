@@ -2,7 +2,11 @@ import type { Def, About, Project } from '@/types'
 import { ref, reactive, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { debounce } from '@/utils'
+import { createStorage } from '@/utils/storage'
 import indexedDB from './indexedDB'
+
+const PROJECT = 'rn-workspace-project'
+const storage = createStorage()
 
 const defaultAbout = {
   name: '',
@@ -14,27 +18,21 @@ const defaultAbout = {
 }
 
 export const useProjectStore = defineStore('project', () => {
-  /* localStorage reading speed seems faster. */
-  const local: Project | null = JSON.parse(
-    localStorage.getItem('rn-workspace-project') as string
-  )
+  const storageProject: Project | null = storage[PROJECT]
 
-  const defs = reactive<Def[]>(local?.defs || [])
+  const defs = reactive<Def[]>(storageProject?.defs || [])
+  const about = reactive<About>(storageProject?.about || defaultAbout)
 
-  const about = reactive<About>(local?.about || defaultAbout)
+  const hasProject = computed<Boolean>(() => about !== defaultAbout)
+  const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
 
   const cover = ref<Blob | null>(null)
   indexedDB.get('cover').then(source => {
     source && (cover.value = source.value)
   })
-
   const coverUrl = computed(() =>
     cover.value ? URL.createObjectURL(cover.value) : ''
   )
-
-  const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
-
-  const hasProject = computed(() => defs.length > 0)
 
   const $reset = () => {
     defs.length = 0
@@ -65,10 +63,7 @@ export const useProjectStore = defineStore('project', () => {
   watch(
     [defs, about],
     debounce(() => {
-      localStorage.setItem(
-        'rn-workspace-project',
-        JSON.stringify({ defs, about })
-      )
+      storage[PROJECT] = { defs, about }
     }, 600)
   )
 

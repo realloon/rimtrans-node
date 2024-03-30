@@ -7,8 +7,8 @@ const project = useProjectStore()
 
 <template>
   <main>
-    <Introduction v-if="!(project.about.name !== '')" />
-    <Project v-if="project.about.name !== ''" />
+    <Introduction v-if="!project.hasProject" />
+    <Project v-if="project.hasProject" />
   </main>
 </template>
 
