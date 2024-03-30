@@ -1,9 +1,9 @@
 import JSZip from 'jszip'
 
 const regexs = {
-  defs: /\d+\.\d+\/Defs\/.+.xml$/,
-  about: /About\/About.xml$/,
-  cover: /About\/preview.png$/,
+  defs: /\d+\.\d+\/Defs\/.+\.xml$/,
+  about: /About\/About\.xml$/,
+  cover: /About\/(?:P|p)review\.(?:png|gif)$/,
 }
 
 type Name = [string, JSZip.JSZipObject]

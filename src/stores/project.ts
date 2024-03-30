@@ -23,7 +23,7 @@ export const useProjectStore = defineStore('project', () => {
   const defs = reactive<Def[]>(storageProject?.defs || [])
   const about = reactive<About>(storageProject?.about || defaultAbout)
 
-  const hasProject = computed<Boolean>(() => about !== defaultAbout)
+  const hasProject = computed<Boolean>(() => defs.length > 0)
   const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
 
   const cover = ref<Blob | null>(null)
