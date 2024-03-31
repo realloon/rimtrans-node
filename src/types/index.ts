@@ -1,4 +1,5 @@
 export type Def = {
+  project: string
   id: string
   folder: string
   tagName: string
@@ -8,6 +9,7 @@ export type Def = {
 }
 
 export type About = {
+  project: string
   name: string
   author: string
   description: string
@@ -16,8 +18,13 @@ export type About = {
   loadAfter: Array<string>
 }
 
+export type Cover = {
+  project: string
+  image: Blob
+}
+
 export type Project = {
-  defs: Array<Def>
+  defs: Def[]
   about: About
-  cover: Blob
+  cover: Cover
 }

@@ -1,0 +1,7 @@
+export { default as addDocument } from './addDocument'
+export { default as addManyDocuments } from './addManyDocuments'
+export { default as deleteDocument } from './deleteDocument'
+export { default as putDocument } from './putDocument'
+export { default as putManyDocuments } from './putManyDocuments'
+export { default as getDocument } from './getDocument'
+export { default as getAllDocument } from './getAllDocument'

@@ -36,9 +36,9 @@ const getLatestDefFiles = (entries: Array<Name>) =>
 const extractXmlsFromZip = async (
   zip: ArrayBuffer
 ): Promise<{
-  defXmls: Array<string>
+  defXmls: string[]
   aboutXml: string
-  cover: Blob
+  sourceCover: Blob
 }> => {
   const target = await new JSZip().loadAsync(zip)
   const entries = Object.entries(target.files).filter(isNotMeta)
@@ -57,9 +57,9 @@ const extractXmlsFromZip = async (
   // cover
   const coverEnter = entries.find(isCoverFile)?.[1]
   if (!coverEnter) throw new Error('No valid preview.png file found.')
-  const cover = await coverEnter.async('blob')
+  const sourceCover = await coverEnter.async('blob')
 
-  return { defXmls, aboutXml, cover }
+  return { defXmls, aboutXml, sourceCover }
 }
 
 export default extractXmlsFromZip

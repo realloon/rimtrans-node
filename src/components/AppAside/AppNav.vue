@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import SubNav from './SubNav.vue'
 import { Icon, IconLabel } from '../'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()
-
-const text = computed(() => project.about.name || 'Workspace')
 </script>
 
 <template>
-  <nav class="menu">
+  <nav>
     <router-link class="project-wrapper" to="/">
       <Icon type="project" />
-      <span class="project-name">{{ text }}</span>
+      <span class="project-name">{{ project.projectName || 'WorkSpace' }}</span>
     </router-link>
 
-    <div v-show="project.hasProject">
+    <div class="menu" :class="project.projectName && 'show'">
       <section>
         <RouterLink to="/defs" class="defs">
           <icon-label icon="read" text="Defs" />
@@ -81,6 +78,16 @@ section {
     font-weight: bold;
     display: block;
     padding: 8px;
+  }
+}
+
+.menu {
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: 0.4s;
+
+  &.show {
+    transform: scaleY(1);
   }
 }
 </style>

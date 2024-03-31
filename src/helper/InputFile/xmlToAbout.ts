@@ -1,6 +1,4 @@
-import type { About } from '@/types'
-
-const xmlToAbout = (xml: string): About => {
+const xmlToAbout = (xml: string) => {
   const parser = new DOMParser()
   const dom = parser.parseFromString(xml, 'application/xml')
 

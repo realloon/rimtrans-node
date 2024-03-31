@@ -9,7 +9,6 @@ function clear() {
   if (!confirm('这会将当前项目清空，且删除浏览器本地缓存！')) return
 
   localStorage.clear()
-  location.reload()
 }
 </script>
 
@@ -24,7 +23,7 @@ function clear() {
 
   <section class="buttons">
     <input-file />
-    <button @click="clear" class="warn">
+    <button disabled @click="clear" class="warn">
       <icon-label icon="close0" text="清空工作区" />
     </button>
   </section>
@@ -43,5 +42,9 @@ function clear() {
 .buttons {
   display: flex;
   gap: 1rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 </style>

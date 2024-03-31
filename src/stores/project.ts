@@ -1,14 +1,9 @@
-import type { Def, About, Project } from '@/types'
-import { ref, reactive, computed, watch } from 'vue'
+import type { Project, Def, About, Cover } from '@/types'
+import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { debounce } from '@/utils'
-import { createStorage } from '@/utils/storage'
-import indexedDB from './indexedDB'
 
-const PROJECT = 'rn-workspace-project'
-const storage = createStorage()
-
-const defaultAbout = {
+const defaultAbout: About = {
+  project: '',
   name: '',
   author: '',
   description: '',
@@ -18,29 +13,23 @@ const defaultAbout = {
 }
 
 export const useProjectStore = defineStore('project', () => {
-  const storageProject: Project | null = storage[PROJECT]
+  // Init.
+  const projectName = ref<string | null>(null)
+  const defs = reactive<Def[]>([])
+  const about = reactive<About>(defaultAbout)
+  const cover = ref<Cover | null>()
 
-  const defs = reactive<Def[]>(storageProject?.defs || [])
-  const about = reactive<About>(storageProject?.about || defaultAbout)
-
-  const hasProject = computed<Boolean>(() => defs.length > 0)
+  // Compute.
   const categories = computed(() => new Set(defs.map(def => def.folder).sort()))
-
-  const cover = ref<Blob | null>(null)
-  indexedDB.get('cover').then(source => {
-    source && (cover.value = source.value)
-  })
   const coverUrl = computed(() =>
-    cover.value ? URL.createObjectURL(cover.value) : ''
+    cover.value ? URL.createObjectURL(cover.value.image) : ''
   )
 
   const $reset = () => {
+    projectName.value = null
     defs.length = 0
     Object.assign(about, defaultAbout)
     cover.value = null
-    storage[PROJECT] = null
-
-    // indexedDB.clearAll()
   }
 
   const update = ({
@@ -52,32 +41,21 @@ export const useProjectStore = defineStore('project', () => {
     // defs
     sourceDefs.forEach(def => {
       defs.push(def)
-      indexedDB.set('defs', def, def.id)
     })
     defs.sort(({ tagName: pre }, { tagName: cur }) => pre.localeCompare(cur))
     // about
     Object.assign(about, sourceAbout)
-    indexedDB.set('about', sourceAbout)
     // cover
     cover.value = sourceCover
-    indexedDB.set('cover', sourceCover)
   }
 
-  // Local cache
-  watch(
-    [defs, about],
-    debounce(() => {
-      storage[PROJECT] = { defs, about }
-    }, 600)
-  )
-
   return {
+    projectName,
     defs,
     about,
     cover,
     coverUrl,
     categories,
-    hasProject,
     $reset,
     update,
   }
