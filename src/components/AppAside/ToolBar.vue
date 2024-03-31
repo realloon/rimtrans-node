@@ -26,6 +26,7 @@ button {
   border: 0;
   width: 48px;
   height: 24px;
+  padding: 0;
   border-radius: 8px;
   cursor: pointer;
   background-color: var(--page);

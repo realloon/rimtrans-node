@@ -1,3 +1,10 @@
+.v-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
 .card {
   border: 1px solid var(--light-border);
   padding: 16px 24px;

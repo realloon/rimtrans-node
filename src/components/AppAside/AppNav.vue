@@ -1,35 +1,40 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import SubNav from './SubNav.vue'
 import { Icon, IconLabel } from '../'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()
+
+const text = computed(() => project.about.name || 'Workspace')
 </script>
 
 <template>
-  <nav class="menu" v-show="project.hasProject ">
+  <nav class="menu">
     <router-link class="project-wrapper" to="/">
       <Icon type="project" />
-      <span class="project-name">{{ project.about.name }}</span>
+      <span class="project-name">{{ text }}</span>
     </router-link>
 
-    <section>
-      <RouterLink to="/defs" class="defs">
-        <icon-label icon="read" text="Defs" />
-      </RouterLink>
-      <sub-nav />
-    </section>
+    <div v-show="project.hasProject">
+      <section>
+        <RouterLink to="/defs" class="defs">
+          <icon-label icon="read" text="Defs" />
+        </RouterLink>
+        <sub-nav />
+      </section>
 
-    <section>
-      <RouterLink to="/about">
-        <icon-label icon="info" text="About" />
-      </RouterLink>
-    </section>
+      <section>
+        <RouterLink to="/about">
+          <icon-label icon="info" text="About" />
+        </RouterLink>
+      </section>
 
-    <section>
-      <RouterLink to="/export">
-        <icon-label icon="export" text="Export" />
-      </RouterLink>
-    </section>
+      <section>
+        <RouterLink to="/export">
+          <icon-label icon="export" text="Export" />
+        </RouterLink>
+      </section>
+    </div>
   </nav>
 </template>
 

@@ -47,13 +47,7 @@ const remove = (source: string) => {
 </template>
 
 <style scoped>
-fieldset {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  border: 0;
-  margin: 0;
-}
+
 
 legend {
   color: var(--theme);

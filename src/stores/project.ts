@@ -36,7 +36,11 @@ export const useProjectStore = defineStore('project', () => {
 
   const $reset = () => {
     defs.length = 0
-    indexedDB.clearAll()
+    Object.assign(about, defaultAbout)
+    cover.value = null
+    storage[PROJECT] = null
+
+    // indexedDB.clearAll()
   }
 
   const update = ({
@@ -67,5 +71,14 @@ export const useProjectStore = defineStore('project', () => {
     }, 600)
   )
 
-  return { defs, about, cover, coverUrl, categories, hasProject, update }
+  return {
+    defs,
+    about,
+    cover,
+    coverUrl,
+    categories,
+    hasProject,
+    $reset,
+    update,
+  }
 })

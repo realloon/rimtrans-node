@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import {EditList} from '@/components'
+import { EditList } from '@/components'
 import { useSettingStore } from '@/stores/setting'
+import { useProjectStore } from '@/stores/project'
 const setting = useSettingStore()
+const project = useProjectStore()
+
+const resetCache = () => {
+  if (!confirm('这将清空浏览器保存的全部本地数据！')) return
+
+  project.$reset()
+}
 </script>
 
 <template>
@@ -15,6 +23,10 @@ const setting = useSettingStore()
         orderly
       />
     </form>
+
+    <section class="card">
+      <button @click="resetCache" class="warn">重置全部缓存</button>
+    </section>
   </main>
 </template>
 
