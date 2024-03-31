@@ -6,13 +6,9 @@ function getAllDocument<T>(
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(storeName, 'readonly')
     const store = transaction.objectStore(storeName)
+    const index = store.index('project') // FIXME: var
 
-    const target =
-      indexName && store.indexNames.contains(indexName)
-        ? store.index(indexName)
-        : store
-
-    const request = target.getAll()
+    const request = index.getAll(indexName ? IDBKeyRange.only(indexName) : null)
 
     transaction.oncomplete = () => resolve(request.result)
     transaction.onerror = () => reject(request.error)

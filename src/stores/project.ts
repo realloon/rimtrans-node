@@ -1,4 +1,4 @@
-import type { Project, Def, About, Cover } from '@/types'
+import type { Def, About, Cover } from '@/types'
 import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 
@@ -26,27 +26,7 @@ export const useProjectStore = defineStore('project', () => {
   )
 
   const $reset = () => {
-    projectName.value = null
     defs.length = 0
-    Object.assign(about, defaultAbout)
-    cover.value = null
-  }
-
-  const update = ({
-    defs: sourceDefs,
-    about: sourceAbout,
-    cover: sourceCover,
-  }: Project) => {
-    $reset()
-    // defs
-    sourceDefs.forEach(def => {
-      defs.push(def)
-    })
-    defs.sort(({ tagName: pre }, { tagName: cur }) => pre.localeCompare(cur))
-    // about
-    Object.assign(about, sourceAbout)
-    // cover
-    cover.value = sourceCover
   }
 
   return {
@@ -57,6 +37,5 @@ export const useProjectStore = defineStore('project', () => {
     coverUrl,
     categories,
     $reset,
-    update,
   }
 })

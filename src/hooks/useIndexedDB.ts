@@ -4,12 +4,14 @@ import storage from '@/utils/storage'
 import { WORKSPACE_NAME } from '@/constants'
 
 export default async () => {
-  const projectName = storage[WORKSPACE_NAME]
+  const projectName: string = storage[WORKSPACE_NAME]
   if (!projectName) return
 
   const project = useProjectStore()
 
   const defs = await storeDefs.getAll(projectName)
+
+  project.$reset()
   defs.forEach(def => project.defs.push(def))
 
   const about = await storeAbout.get(projectName)
@@ -17,6 +19,4 @@ export default async () => {
 
   const cover = await storeCover.get(projectName)
   project.cover = cover
-
-  
 }
