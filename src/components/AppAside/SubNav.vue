@@ -17,6 +17,7 @@ const project = useProjectStore()
 <style scoped>
 .sub-menu {
   margin: -4px 8px 8px;
+  padding-bottom: 8px;
 }
 
 .sub-menu a {

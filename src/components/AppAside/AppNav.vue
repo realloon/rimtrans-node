@@ -50,10 +50,6 @@ nav {
   border-radius: 6px;
   transition: 0.2s;
 
-  &:hover {
-    background-color: var(--page);
-  }
-
   .project-name {
     padding: 0;
     display: block;
