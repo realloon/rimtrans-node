@@ -2,9 +2,7 @@
 import { ref } from 'vue'
 import { IconLabel } from '@/components'
 import { useProjectStore } from '@/stores/project'
-import indexedDB from '@/stores/indexedDB'
 import Progression from '@/components/Progression.vue'
-import saveFile from '@/utils/saveFile'
 import { outputMod } from '@/helper/ExportView'
 
 const { defs, about } = useProjectStore()
