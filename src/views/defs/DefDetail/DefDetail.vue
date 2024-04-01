@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import type { Def } from '@/types'
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
 import { AutoTextarea } from '@/components'
 import Preview from './Preview.vue'
-
-const showPreview = ref(false)
+import { debounce } from '@/utils'
+import { storeDefs } from '@/utils/bean'
 
 defineProps<{ def: Def }>()
+const showPreview = ref(false)
+
+const update = debounce((def: Def) => {
+  storeDefs.put(toRaw(def))
+}, 300)
 </script>
 
 <template>
@@ -18,6 +23,7 @@ defineProps<{ def: Def }>()
         type="checkbox"
         :disabled="def.translated === ''"
         v-model="def.completed"
+        @change="update(def)"
         name="completed"
       />
 
@@ -45,6 +51,7 @@ defineProps<{ def: Def }>()
     <auto-textarea
       v-show="!showPreview"
       v-model="def.translated"
+      @update:model-value="update(def)"
       :placeholder="def.content"
     />
     <preview v-show="showPreview" :text="def.translated" />

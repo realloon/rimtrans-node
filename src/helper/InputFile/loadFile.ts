@@ -33,5 +33,5 @@ export default async function loadFile(event: Event) {
   storeAbout.put(about)
   storeCover.put(cover)
 
-  // useIndexedDB()
+  useIndexedDB()
 }
