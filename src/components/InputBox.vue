@@ -4,7 +4,9 @@ defineProps<{
   label: string
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void
+}>()
 
 function updateValue(event: Event) {
   const inputElement = event.target as HTMLInputElement
@@ -16,11 +18,7 @@ function updateValue(event: Event) {
 
 <template>
   <label>
-    <input
-      :value="modelValue"
-      @input="updateValue"
-      v-bind="$attrs"
-    />
+    <input :value="modelValue" @input="updateValue" v-bind="$attrs" />
     <span>{{ label }}</span>
   </label>
 </template>

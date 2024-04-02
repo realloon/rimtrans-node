@@ -1,21 +1,26 @@
 <script setup lang="ts">
-import { toRefs, toRaw } from 'vue'
+import { ref, toRefs, toRaw, onMounted } from 'vue'
 import { IconLabel, InputBox, EditList } from '@/components'
 import { useProjectStore } from '@/stores/project'
-import { debounce } from '@/utils'
+import useBean from '@/hooks/useBean'
 
 const { about } = toRefs(useProjectStore())
 
-const update = debounce(() => {
-  // storeAbout.put(toRaw(about.value))
-}, 300)
+const store = ref()
+
+onMounted(async () => {
+  const { storeAbout } = await useBean()
+  store.value = storeAbout
+})
+
+const update = () => store.value.put(toRaw(about.value))
 </script>
 
 <template>
   <main>
     <h2>About</h2>
 
-    <form @change="update">
+    <form @input="update">
       <fieldset>
         <legend>
           <icon-label icon="edit" text="基本信息" class="legend" />
