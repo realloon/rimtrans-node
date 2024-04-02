@@ -2,13 +2,12 @@
 import { toRefs, toRaw } from 'vue'
 import { IconLabel, InputBox, EditList } from '@/components'
 import { useProjectStore } from '@/stores/project'
-import { storeAbout } from '@/utils/bean'
 import { debounce } from '@/utils'
 
 const { about } = toRefs(useProjectStore())
 
 const update = debounce(() => {
-  storeAbout.put(toRaw(about.value))
+  // storeAbout.put(toRaw(about.value))
 }, 300)
 </script>
 

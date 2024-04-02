@@ -10,7 +10,7 @@ import {
   getAllDocument,
 } from './CRUD'
 
-async function useBean(name: string = 'bean-db') {
+async function createBean(name: string = 'bean-db') {
   let db = await createDatabase(name)
 
   return {
@@ -52,4 +52,4 @@ async function useBean(name: string = 'bean-db') {
   }
 }
 
-export { useBean }
+export { createBean }

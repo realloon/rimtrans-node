@@ -1,2 +1,2 @@
-import { useBean } from './main'
-export { useBean }
+import { createBean } from './main'
+export { createBean }

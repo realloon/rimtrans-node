@@ -4,13 +4,12 @@ import { ref, toRaw } from 'vue'
 import { AutoTextarea } from '@/components'
 import Preview from './Preview.vue'
 import { debounce } from '@/utils'
-import { storeDefs } from '@/utils/bean'
 
 defineProps<{ def: Def }>()
 const showPreview = ref(false)
 
 const update = debounce((def: Def) => {
-  storeDefs.put(toRaw(def))
+  // storeDefs.put(toRaw(def))
 }, 300)
 </script>
 

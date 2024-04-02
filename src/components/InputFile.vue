@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { IconLabel } from '@/components'
-import { loadFile } from '@/helper/InputFile'
+import loadFile from '@/helper/InputFile'
 import { useProjectStore } from '@/stores/project'
 const project = useProjectStore()
+
+const handle = (event: Event) => {
+  loadFile(event)
+}
 </script>
 
 <template>
   <button :class="project.projectName ? 'warn' : 'theme'">
     <icon-label icon="folder" text="加载新项目" />
-    <input @change="loadFile" type="file" accept=".zip, .rnp" />
+    <input @change="handle" type="file" accept=".zip, .rnp" />
   </button>
 </template>
 
