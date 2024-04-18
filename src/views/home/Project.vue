@@ -31,7 +31,7 @@ function clear() {
 
 <style scoped>
 .cover {
-  aspect-ratio: 16 / 9;
+  width: 100%;
 
   & > img {
     display: block;
