@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import logo from '@/assets/images/logo.png'
-import chat from '@/assets/images/chat.png'
 import { Icon, InputFile } from '@/components'
+import ChatMod from './components/ChatMod'
+const version = ref('')
 
-const version = ref('0.0.0')
-
-fetch(
-  'https://raw.githubusercontent.com/realloon/rimtrans-node/main/package.json'
-)
-  .then(res => res.json())
-  .then(data => (version.value = data.version))
+onMounted(async () => {
+  const res = await fetch(
+    'https://raw.githubusercontent.com/realloon/rimtrans-node/main/package.json'
+  )
+  const data = await res.json()
+  version.value = data.version
+})
 </script>
 
 <template>
@@ -27,11 +28,9 @@ fetch(
     <p class="warn">
       Rimtrans Node 正处于早期开发阶段，<br />为避免意外情况，请勿用于正式翻译项目。
     </p>
-    <div class="chat">
-      <span>710882819</span>
-      <img :src="chat" />
-    </div>
   </article>
+
+  <chat-mod />
 </template>
 
 <style scoped>
@@ -68,26 +67,5 @@ img {
 .warn {
   color: var(--warn);
   font-weight: bold;
-}
-.chat {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: bold;
-  font-family: var(--mono);
-  padding-left: 10px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  color: white;
-  background-color: #262626;
-
-  img {
-    width: 120px;
-    height: 120px;
-    border-radius: 16px;
-  }
 }
 </style>

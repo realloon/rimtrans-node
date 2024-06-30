@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { IconLabel } from '@/components'
-import { useProjectStore } from '@/stores/project'
 import Progression from '@/components/Progression.vue'
-import { outputMod } from '@/helper/ExportView'
+import outputMod from './helper/outputMod'
+import LormSelect from '@/components/Select/LormSelect.vue'
 
-const { defs, about } = useProjectStore()
-
-const language = ref('ChineseSimplified')
-const languages = { ChineseSimplified: '简体中文' }
+const language = ref('')
+const languages = [
+  {
+    key: 'ChineseSimplified',
+    text: '简体中文',
+  },
+]
 
 const exportProject = async () => {}
 </script>
@@ -33,18 +36,12 @@ const exportProject = async () => {}
     <section class="card">
       <h3>生成模组</h3>
       <p>输出当前项目，生成 Mod 文件夹压缩包，<br />这适用于发布 Mod 文件。</p>
-      <p>
-        目标语言
-        <select v-model="language" name="language">
-          <option
-            v-for="[key, value] in Object.entries(languages)"
-            :value="key"
-          >
-            {{ value }}
-          </option>
-        </select>
-        <span class="language">{{ language }}</span>
-      </p>
+
+      <div class="lang-select">
+        <span>目标语言：</span>
+        <lorm-select :data="languages" v-model="language" />
+      </div>
+
       <button @click="outputMod(language)" class="theme">
         <icon-label icon="export" text="生成" size="20" />
       </button>
@@ -60,10 +57,8 @@ section {
   gap: 1rem;
 }
 
-.language {
-  color: var(--theme);
-  font-weight: bold;
-  font-family: var(--mono);
-  padding: 0 1em;
+.lang-select {
+  display: flex;
+  align-items: baseline;
 }
 </style>
