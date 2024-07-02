@@ -1,24 +1,14 @@
 <script setup lang="ts">
 defineProps<{
-  modelValue: string
   label: string
 }>()
 
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void
-}>()
-
-function updateValue(event: Event) {
-  const inputElement = event.target as HTMLInputElement
-  if (inputElement) {
-    emit('update:modelValue', inputElement.value.trim())
-  }
-}
+const model = defineModel()
 </script>
 
 <template>
   <label>
-    <input :value="modelValue" @input="updateValue" v-bind="$attrs" />
+    <input v-model="model" v-bind="$attrs" />
     <span>{{ label }}</span>
   </label>
 </template>
