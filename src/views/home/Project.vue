@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Progression from '@/components/Progression.vue'
 import { IconLabel, InputFile } from '@/components'
+import { LormButton } from '@/components/common'
 import { useProjectStore } from '@/stores/project'
 
 const project = useProjectStore()
@@ -23,9 +24,7 @@ function clear() {
 
   <section class="buttons">
     <input-file />
-    <button disabled @click="clear" class="warn">
-      <icon-label icon="close0" text="清空工作区" />
-    </button>
+    <lorm-button @click="clear" text="清空工作区" type="warn" disabled />
   </section>
 </template>
 

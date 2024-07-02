@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { IconLabel } from '@/components'
 import Progression from '@/components/Progression.vue'
 import outputMod from './helper/outputMod'
-import LormSelect from '@/components/Select/LormSelect.vue'
+import { LormButton, LormSelect } from '@/components/common'
 
 const language = ref('')
 const languages = [
@@ -28,9 +28,7 @@ const exportProject = async () => {}
         保存当前项目，储存为
         <code>.rnp</code> 项目文件，<br />这适用于在不同设备间同步进度。
       </p>
-      <button @click="exportProject" class="theme">
-        <icon-label icon="download" text="保存" size="21" />
-      </button>
+      <lorm-button @click="exportProject" text="保存" />
     </section>
 
     <section class="card">
@@ -42,9 +40,7 @@ const exportProject = async () => {}
         <lorm-select :data="languages" v-model="language" />
       </div>
 
-      <button @click="outputMod(language)" class="theme">
-        <icon-label icon="export" text="生成" size="20" />
-      </button>
+      <lorm-button @click="outputMod" text="生成" />
     </section>
   </main>
 </template>

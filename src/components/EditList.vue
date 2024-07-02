@@ -11,6 +11,7 @@ const props = defineProps<{
 const input = ref('')
 
 const add = () => {
+  if (input.value === '') return alert('输入不能为空')
   if (props.list.includes(input.value)) return alert('已有重复项目')
 
   props.list.push(input.value)
@@ -47,8 +48,6 @@ const remove = (source: string) => {
 </template>
 
 <style scoped>
-
-
 legend {
   color: var(--theme);
   font-weight: bold;
