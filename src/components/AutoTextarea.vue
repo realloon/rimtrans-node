@@ -1,51 +1,36 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 
-const props = defineProps<{
-  modelValue: string
+defineProps<{
+  name?: string
 }>()
 
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void
-}>()
+const model = defineModel<string>()
 
-const textareaRef = ref<HTMLTextAreaElement | null>(null)
+const textareaRef = ref<HTMLTextAreaElement>()
 
-const updateModelValue = (event: Event) => {
-  const target = event.target as HTMLTextAreaElement
-  const value = target.value
-  emit('update:modelValue', value)
-  adjustHeight(target)
-}
+function adjustHeight() {
+  const element = textareaRef.value
+  if (!element) return
 
-const adjustHeight = (element: HTMLTextAreaElement) => {
   element.style.height = 'auto'
   element.style.height = `${element.scrollHeight}px`
 }
 
-watch(
-  () => props.modelValue,
-  newValue => {
-    const textarea = textareaRef.value
-    if (!textarea) return
-    textarea.value = newValue
-    adjustHeight(textarea)
-  }
-)
+function trim() {
+  model.value = model.value!.trim()
+}
 
-onMounted(() => {
-  const textarea = textareaRef.value
-  if (!textarea) return
-  adjustHeight(textarea)
-})
+onMounted(adjustHeight)
+watch(model, adjustHeight) // in order to respond to AI translate modifications.
 </script>
 
 <template>
   <textarea
     ref="textareaRef"
-    :value="modelValue"
-    @input="updateModelValue"
-    name="filed"
+    v-model="model"
+    @change="trim"
+    :name="name ?? 'field'"
   ></textarea>
 </template>
 
