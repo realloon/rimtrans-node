@@ -1,4 +1,4 @@
-import type { Def, About, Cover, Project } from '@/types'
+import type { Def, About, Cover } from '@/types'
 import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 

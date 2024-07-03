@@ -1,13 +1,17 @@
 <script setup lang="ts">
-defineProps<{
-  text: string
-  type?: 'prime' | 'warn'
-}>()
+withDefaults(
+  defineProps<{
+    type?: 'prime' | 'warn'
+  }>(),
+  {
+    type: 'prime',
+  }
+)
 </script>
 
 <template>
-  <button class="lorm-button" :class="type ?? 'prime'" v-bind="$attrs">
-    {{ text }}
+  <button class="lorm-button" :class="type" v-bind="$attrs">
+    <slot></slot>
   </button>
 </template>
 
@@ -26,7 +30,7 @@ defineProps<{
   transition: 0.4s;
 }
 
-.lorm-button.theme:hover {
+.lorm-button.prime:hover {
   color: var(--theme);
   outline-color: var(--theme);
 }
@@ -34,5 +38,9 @@ defineProps<{
 .lorm-button.warn:hover {
   color: var(--warn);
   outline-color: var(--warn);
+}
+
+.lorm-button:disabled {
+  cursor: not-allowed;
 }
 </style>

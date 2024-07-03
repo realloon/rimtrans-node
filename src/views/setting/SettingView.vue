@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { EditList, InputBox } from '@/components'
-import { useSettingStore } from '@/stores/setting'
 import { useProjectStore } from '@/stores/project'
-const setting = useSettingStore()
 const project = useProjectStore()
+//
+import { useConfigStore } from '@/stores/config'
+const configStore = useConfigStore()
 
 const resetCache = () => {
   if (!confirm('这将清空浏览器保存的全部本地数据！')) return
@@ -18,7 +19,7 @@ const resetCache = () => {
     <form>
       <edit-list
         icon="search1"
-        :list="setting.extractFields"
+        :list="configStore.extractFields"
         :header="'提取字段'"
         orderly
       />
@@ -28,21 +29,21 @@ const resetCache = () => {
       <div class="wrapper">
         <input-box
           label="appKey"
-          v-model.trim="setting.translateConfig.appKey"
+          v-model.trim="configStore.translateConfig.appKey"
           placeholder="输入你申请的应用 ID"
           name="name"
         />
 
         <input-box
           label="key"
-          v-model.trim="setting.translateConfig.key"
+          v-model.trim="configStore.translateConfig.key"
           placeholder="输入你申请的应用密匙"
           name="name"
         />
 
         <input-box
           label="vocabId"
-          v-model.trim="setting.translateConfig.vocabId"
+          v-model.trim="configStore.translateConfig.vocabId"
           placeholder="输入你申请的词表 ID"
           name="name"
         />

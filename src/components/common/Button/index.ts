@@ -1,2 +1,2 @@
-import LormButton from './LormButton.vue'
-export default LormButton
+import Button from './Button.vue'
+export default Button

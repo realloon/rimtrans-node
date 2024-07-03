@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import Progression from '@/components/Progression.vue'
 import InputFile from '@/components/InputFile'
-import { LormButton } from '@/components/common'
+import { Button } from '@/components/common'
 import { useProjectStore } from '@/stores/project'
+import { Card } from '@/components/common'
 
 const project = useProjectStore()
 
@@ -22,10 +23,10 @@ function clear() {
 
   <Progression />
 
-  <section class="buttons">
+  <div class="btns-wrapper">
     <input-file />
-    <lorm-button @click="clear" text="清空工作区" type="warn" disabled />
-  </section>
+    <Button type="warn" disabled>清空工作区</Button>
+  </div>
 </template>
 
 <style scoped>
@@ -38,12 +39,12 @@ function clear() {
   }
 }
 
-.buttons {
+.btns-wrapper {
   display: flex;
   gap: 1rem;
-}
 
-button:disabled {
-  cursor: not-allowed;
+  button {
+    background-color: var(--panel);
+  }
 }
 </style>
