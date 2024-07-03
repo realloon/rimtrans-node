@@ -5,7 +5,7 @@ import AppAside from './components/AppAside/AppAside.vue'
 import { useProjectStore } from '@/stores/project'
 import updatePiniaStores from '@/helper/updatePiniaStores'
 import storage from '@/utils/storage'
-import { WORKSPACE_NAME } from '@/constants'
+import { WORKSPACE_NAME } from '@/constant'
 
 const project = useProjectStore()
 

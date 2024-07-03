@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Def } from '@/types'
 import { ref, computed, toRaw, onMounted } from 'vue'
-import DefDetail from './DefDetail/DefDetail.vue'
+import DefDetail from './components/DefDetail'
 import { useRoute } from 'vue-router'
 import { useProjectStore } from '@/stores/project'
 import useScrollLoad from '@/hooks/useScrollLoad'

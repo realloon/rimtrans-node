@@ -1,6 +1,6 @@
 import useBean from '@/hooks/useBean'
 import storage from '@/utils/storage'
-import { WORKSPACE_NAME } from '@/constants'
+import { WORKSPACE_NAME } from '@/constant'
 import { useProjectStore } from '@/stores/project'
 
 export default async () => {

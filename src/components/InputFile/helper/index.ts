@@ -3,9 +3,9 @@ import readFile from './readFile'
 import extractProject from './extractProject'
 import { capitalized } from '@/utils'
 import storage from '@/utils/storage'
-import { WORKSPACE_NAME, PROJECTS } from '@/constants'
+import { WORKSPACE_NAME, PROJECTS } from '@/constant'
 import useBean from '@/hooks/useBean'
-import updatePiniaStores from '../updatePiniaStores'
+import updatePiniaStores from '@/helper/updatePiniaStores'
 
 const defaultProjectName = (file: File): string =>
   capitalized(file.name.split('.')[0])

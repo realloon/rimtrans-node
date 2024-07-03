@@ -1,6 +1,6 @@
 import type { About, Def, Cover } from '@/types'
 import { createBean } from '@/modules/bean'
-import { DATABASE_NAME } from '@/constants'
+import { DATABASE_NAME } from '@/constant'
 
 export default async () => {
   const db = await createBean(DATABASE_NAME)

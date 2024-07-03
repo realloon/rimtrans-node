@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Progression from '@/components/Progression.vue'
-import { IconLabel, InputFile } from '@/components'
+import InputFile from '@/components/InputFile'
 import { LormButton } from '@/components/common'
 import { useProjectStore } from '@/stores/project'
 

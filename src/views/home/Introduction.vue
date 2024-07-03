@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import logo from '@/assets/images/logo.png'
-import { Icon, InputFile } from '@/components'
+import { Icon } from '@/components'
+import InputFile from '@/components/InputFile'
 import ChatMod from './components/ChatMod'
 const version = ref('')
 

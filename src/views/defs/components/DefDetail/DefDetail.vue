@@ -1,30 +1,20 @@
 <script setup lang="ts">
 import type { Def } from '@/types'
 import { ref } from 'vue'
+// Componets
 import { AutoTextarea } from '@/components'
-import Preview from './Preview.vue'
-import SwitchGroup from './SwitchGroup.vue'
-// Functions
-import translate from '@/utils/translate'
-import { useSettingStore } from '@/stores/setting'
+import PreviewButton from './components/PreviewButton.vue'
+import Preview from './components/Preview'
+import AITranslate from './components/AITranslate'
 
-const settingStore = useSettingStore()
-const { appKey, key, vocabId } = settingStore.translateConfig
-
-const props = defineProps<{ def: Def }>()
+defineProps<{ def: Def }>()
 
 const emit = defineEmits<{
   (event: 'change', value: Def): void
 }>()
 
-const showPreview = ref(false)
-
-async function useTranslate() {
-  const query = props.def.content
-  const transed = await translate({ query, appKey, key, vocabId })
-
-  props.def.translated = transed
-}
+const showOriginalPreview = ref(false)
+const showTranslatePreview = ref(false)
 </script>
 
 <template>
@@ -40,28 +30,38 @@ async function useTranslate() {
         name="completed"
       />
 
-      <span @click="useTranslate" class="trans">AI Translate</span>
+      <preview-button :content="def.content" v-model="showOriginalPreview" />
 
-      <switch-group
-        :group="['Original', 'Preview']"
-        @change="showPreview = $event === 'Preview'"
-      />
+      <AITranslate :def="def" />
     </section>
 
-    <!-- original -->
-    <blockquote v-show="!showPreview" class="original">
-      {{ def.content }}
-    </blockquote>
-    <preview v-show="showPreview" :text="def.content" />
+    <section>
+      <!-- original -->
+      <blockquote v-if="!showOriginalPreview" class="original">
+        {{ def.content }}
+      </blockquote>
 
-    <!-- translate -->
-    <auto-textarea
-      v-show="!showPreview"
-      v-model="def.translated"
-      @update:model-value="emit('change', def)"
-      :placeholder="def.content"
-    />
-    <preview v-show="showPreview" :text="def.translated" />
+      <preview v-else :text="def.content" />
+    </section>
+
+    <section class="translate-wrapper">
+      <auto-textarea
+        v-if="!showTranslatePreview"
+        v-model="def.translated"
+        @update:model-value="emit('change', def)"
+        placeholder="Input translation"
+      />
+
+      <preview v-else :text="def.translated" />
+
+      <div class="hover-tools">
+        <preview-button
+          :content="def.translated"
+          v-model="showTranslatePreview"
+          type="icon"
+        />
+      </div>
+    </section>
   </fieldset>
 </template>
 
@@ -109,5 +109,15 @@ fieldset {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.translate-wrapper {
+  position: relative;
+
+  .hover-tools {
+    position: absolute;
+    top: 0;
+    right: -1.5rem;
+  }
 }
 </style>

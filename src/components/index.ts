@@ -1,7 +1,6 @@
 export { default as Spacer } from './Spacer.vue'
 export { default as Icon } from './Icon.vue'
 export { default as IconLabel } from './IconLabel.vue'
-export { default as InputFile } from './InputFile.vue'
 export { default as InputBox } from './InputBox.vue'
 export { default as AutoTextarea } from './/AutoTextarea.vue'
 export { default as EditList } from './EditList.vue'
